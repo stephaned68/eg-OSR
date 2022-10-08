@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Audiowide:wght@200&display=swap');
+
+:root {
+  --egosr-mainfont : 'Exo 2', sans-serif;
+  --egosr-altfont: 'Audiowide', cursive;
+}
+
+.charsheet {
+  font-family: var(--egosr-altfont);
+}
+
+ul.nav-tabs.nav {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 9999;
+}
+
+div.charsheet .repcontrol .btn {
+  border-radius: 2px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: small;
+}
+
+input, 
+select {
+  padding: 0px;
+  margin: 0px;
+  max-height: 22px;
+  background-color: #f5f5f5;
+}
+
+textarea {
+  padding: 0;
+  margin: 5px 0px;
+  background-color: #f5f5f5;
+}
+
+div.sheet-main {
+  width: 840px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+
+  background: #DBE6F6;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #C5796D, #DBE6F6);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #C5796D, #DBE6F6);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+/*Configure the tab buttons*/
+.charsheet .sheet-character,
+.charsheet .sheet-config,
+.charsheet .sheet-gear {
+  display: none;
+}
+
+.sheet-tab-btn {
+  border-color: #333;
+  border-left: 1px;
+  border-top: 1px;
+  border-right: 1px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+/* show the selected tab */
+.charsheet .sheet-tabstoggle[value="character"]~div.sheet-character,
+.charsheet .sheet-tabstoggle[value="config"]~div.sheet-config,
+.charsheet .sheet-tabstoggle[value="gear"]~div.sheet-gear {
+  display: block;
+  border-top: 1px;
+  border-color: #333;
+}
+
+h2 {
+  color:orangered;
+}
+
+div.sheet-grid-bio {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+}
+
+div.sheet-grid-main {
+  display: grid;
+  grid-template-columns: 26% 37% 37%;
+}
+
+label.sheet-bio {
+  display: inline-block;
+  font-size: small;
+  text-align: right;
+  vertical-align: top;
+  width: 80px;
+}
+
+input.sheet-bio {
+  width: calc(100% - 100px);
+}
+
+textarea.sheet-bio {
+  width: calc(100% - 105px);
+  height: auto;
+}
+
+.charsheet button[type=roll]:before {
+  font-family: "dicefontd6" !important;
+  content: 'f' !important;
+}
+
+.charsheet input[type=number].sheet-small {
+  width: 2.5em;
+}
+
+.charsheet input.sheet-toggle-show:not(:checked) ~ div.sheet-hidden-block {
+  display: none;
+}
+
+.sheet-centered {
+  text-align: center;
+}
+
+.sheet-right {
+  text-align: right;
+}
+
+.sheet-w-100 {
+  width: 100%;
+}
+
+.sheet-px-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sheet-my-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.sheet-my-15 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.sheet-py-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.sheet-background-secondary {
+  background-color:thistle;
+}
+
+.sheet-background-dark {
+  background-color: #333;
+}
+
+.sheet-text-white {
+  color: white;
+}
+
+.sheet-rounded-5 {
+  border-radius: 5px;
+}
+
+.sheet-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: right;
+}
+
+.sheet-carac {
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 2.5em !important;
+  text-align: right;
+  border-radius: 5px;
+}
+
+.sheet-float-right {
+  float: right;
+}
+
+.sheet-small {
+  width: 30px;
+}
+
+.sheet-skill-group {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 2px;
+  border-style: inset;
+  border-color: lightslategray;
+  border-width: 0 1px 1px 0;
+  border-radius: 0 0 10px 0;
+}
+
+.sheet-skill {
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 30px;
+  text-align: right;
+  border-radius: 0 10px 10px 0;
+  padding: 2px;
+}
+
+label.sheet-carac {
+  font-size: 2rem;
+}
+
+select.sheet-ability {
+  width: 75px;
+}
+
+select.sheet-rolltype {
+  width: 105px;
+}
+
+.charsheet summary {
+  cursor: pointer;
+  display: revert;
+}
+
+button.sheet-flat-btn {
+  border: 0px;
+  background-color: transparent;
+  background-image: none;
+}
+
+button.sheet-picto-btn {
+  font-family: "pictos";
+}
+
+button[type="action"].sheet-picto-btn::before {
+  content: "";
+}
+
+button[type="roll"].sheet-picto-btn::before {
+  content: "" !important;
+}
+
+.sheet-talent-group {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 2px;
+  width: 100%;
+}
+
+.sheet-talent {
+  width: calc(100%-5px);
+}
+
+textarea.sheet-notes {
+  height: auto;
+}
+
+span.sheet-w-25 {
+  display: inline-block;
+  width: 25%;
+}
+
+span.sheet-w-33 {
+  display: inline-block;
+  width: 33%;
+}
+
+/* ROLL TEMPLATES */
+.sheet-rolltemplate-eg {
+  width: calc(100% - 10px);
+  padding: 5px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background: white;
+  padding-bottom: 15px;
+  font-family: 'Exo 2', sans-serif;
+  /* font-family: 'Audiowide',cursive; */
+  font-size: 1.4rem;
+}
+
+.sheet-rolltemplate-eg .sheet-template-wrap {
+  background-color: white;
+  color: black;
+}
+
+.sheet-rolltemplate-eg .sheet-template-wrap .inlinerollresult {
+  background-color: transparent;
+  border-width: 1px;
+  border-color: #7f989d;
+  border-style: solid;
+  border-radius: 25%;
+}
+
+.sheet-rolltemplate-eg div.sheet-title {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: #333;
+}
+
+.sheet-rolltemplate-eg h3.sheet-title {
+  text-align: center;
+  color: white;
+}
+
+.sheet-rolltemplate-eg h5.sheet-title {
+  text-align: center;
+  color: #333;
+}
+
+.sheet-rolltemplate-eg span.sheet-prop {
+  font-weight: bold;
+  float: right
+}
+
+.sheet-rolltemplate-eg .sheet-mt-5 {
+  margin-top: 5px;
+}
+
+.sheet-rolltemplate-eg .sheet-major {
+  font-weight: bolder;
+}
+
+.sheet-rolltemplate-eg .sheet-margin {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.sheet-rolltemplate-eg .sheet-success {
+  background-color: lightgreen;
+  color: darkslategray;
+  width: 100%;
+  text-align: center;
+}
+
+.sheet-rolltemplate-eg .sheet-failure {
+  background-color: lightcoral;
+  color: darkslategray;
+  width: 100%;
+  text-align: center;
+}
+
+.sheet-rolltemplate-eg .sheet-txt-small {
+  font-size: small;
+}
+
+body.sheet-darkmode .charsheet label {
+  color:black;
+}

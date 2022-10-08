@@ -1,0 +1,2269 @@
+<!-- HIDDEN DATA -->
+<input type="hidden" name="attr_version" value="1.0.0" />
+<input type="hidden" name="attr_sheet_ver" value="1.0.0" />
+<input type="hidden" name="attr_debug_mode" value="0" />
+<input type="hidden" name="attr_char_sheet" value="" />
+<input type="hidden" name="attr_dice_roll" value="2d6" />
+<input type="hidden" name="attr_roll_conditions" value="" />
+<input type="hidden" name="attr_char_conditions" value="" />
+<input type="hidden" name="attr_vitality" value="" />
+<input type="hidden" name="attr_got_dmg" value="0" />
+
+<!-- CHARACTER SHEET -->
+<div class="sheet-main">
+  <div class="sheet-my-5 sheet-rounded-5 sheet-background-dark">
+    <h1 class="sheet-centered sheet-text-white">EMPIRE GALACTIQUE</h1>
+  </div>
+  <div class="sheet-grid-bio">
+    <div class="sheet-col">
+      <div>
+        <label class="sheet-bio">Nom</label>
+        <input class="sheet-bio" type="text" name="attr_character_name" />
+      </div>
+      <div>
+        <label class="sheet-bio">Genre</label>
+        <input class="sheet-bio" type="text" name="attr_gender" />
+      </div>
+      <div>
+        <label class="sheet-bio">Origine</label>
+        <input class="sheet-bio" type="text" name="attr_origin" />
+      </div>
+      <div>
+        <label class="sheet-bio">Carrière</label>
+        <input
+          class="sheet-bio"
+          type="text"
+          list="careerList"
+          name="attr_career"
+        />
+        <datalist id="careerList">
+          <option>Aventurier</option>
+          <option>Prêtre</option>
+          <option>Soldat</option>
+          <option>Marchand</option>
+          <option>Navyborg</option>
+          <option>Tekno</option>
+        </datalist>
+      </div>
+      <div>
+        <label class="sheet-bio">Grade</label>
+        <input
+          class="sheet-bio sheet-carac sheet-right"
+          type="number"
+          name="attr_grade"
+        />
+        <input type="hidden" name="attr_grade_name" />
+        <span name="attr_grade_name"></span>
+      </div>
+      <div>
+        <label class="sheet-bio">Pts Guilde</label>
+        <input
+          type="number"
+          class="sheet-bio sheet-carac sheet-right"
+          name="attr_guild_pts"
+        />
+      </div>
+    </div>
+    <div class="sheet-col sheet-centered">
+      <img width="120px" height="120px" name="attr_character_token" />
+    </div>
+    <div class="sheet-col">
+      <div>
+        <label class="sheet-bio">Age</label>
+        apparent :&nbsp;
+        <input
+          type="number"
+          class="sheet-right"
+          name="attr_age_app"
+          value="18"
+        />
+        réel :&nbsp;
+        <input type="number" class="sheet-right" name="attr_age" value="18" />
+      </div>
+      <div>
+        <label class="sheet-bio">Corpulence</label>
+        <input
+          type="number"
+          class="sheet-right"
+          name="attr_height"
+          value="1.70"
+        />
+        m
+        <input
+          type="number"
+          class="sheet-right"
+          name="attr_weight"
+          value="70"
+        />
+        kg
+      </div>
+      <div>
+        <label class="sheet-bio">Apparence</label>
+        <textarea class="sheet-bio" name="attr_appearance" rows="4"></textarea>
+      </div>
+      <div>
+        <label class="sheet-bio">Citation</label>
+        <input class="sheet-bio" type="text" name="attr_quote" />
+      </div>
+    </div>
+  </div>
+  <input
+    type="hidden"
+    class="sheet-tabstoggle"
+    name="attr_sheet_tab"
+    value="character"
+  />
+  <div>
+    <button type="action" name="act_character" class="sheet-tab-btn">
+      Personnage
+    </button>
+    <button type="action" name="act_gear" class="sheet-tab-btn">
+      Equipement et Notes
+    </button>
+    <button type="action" name="act_config" class="sheet-tab-btn">
+      Configuration
+    </button>
+  </div>
+  <!-- Tab 1 : personnage -->
+  <div class="sheet-character">
+    <div
+      class="sheet-3colrow sheet-py-5 sheet-my-5 sheet-rounded-5 sheet-background-secondary"
+    >
+      <div class="sheet-col sheet-centered">
+        Situation :&nbsp;
+        <select class="sheet-rolltype" name="attr_rolltype">
+          <option value="2d6" selected>Normal</option>
+          <option value="3d6dl1">Atout</option>
+          <option value="3d6dh1">Complication</option>
+        </select>
+      </div>
+      <div class="sheet-col sheet-centered">
+        Difficulté :&nbsp;
+        <select class="sheet-rolltype" name="attr_diffmod">
+          <option value="+4">Facile</option>
+          <option value="+2">Aisée</option>
+          <option value="+0" selected>Modérée</option>
+          <option value="-2">Délicate</option>
+          <option value="-4">Difficle</option>
+          <option value="-6">Formidable</option>
+        </select>
+      </div>
+      <div class="sheet-col sheet-centered">
+        Points de Fortune :&nbsp;
+        <input
+          type="number"
+          class="sheet-carac"
+          name="attr_fortune"
+          value="2"
+        />
+        /
+        <input
+          type="number"
+          class="sheet-carac"
+          name="attr_fortune_max"
+          value="2"
+        />
+      </div>
+    </div>
+    <div class="sheet-grid-main">
+      <div class="sheet-col sheet-px-10">
+        <!-- Attributs -->
+        <h2>Attributs</h2>
+        <br />
+        <!-- For -->
+        <label class="sheet-label">
+          <input type="radio" name="attr_ability" value="@{for}" />
+          Force<input
+            type="number"
+            class="sheet-carac sheet-float-right"
+            name="attr_for"
+            value="0"
+          />
+        </label>
+        <!-- Hab -->
+        <label class="sheet-label">
+          <input type="radio" name="attr_ability" value="@{hab}" />
+          Habileté
+          <input
+            type="number"
+            class="sheet-carac sheet-float-right"
+            name="attr_hab"
+            value="0"
+          />
+        </label>
+        <!-- Viv -->
+        <label class="sheet-label">
+          <input type="radio" name="attr_ability" value="@{viv}" />
+          Vivacité
+          <input
+            type="number"
+            class="sheet-carac sheet-float-right"
+            name="attr_viv"
+            value="0"
+          />
+        </label>
+        <!-- Int -->
+        <label class="sheet-label">
+          <input type="radio" name="attr_ability" value="@{int}" />
+          Intellect
+          <input
+            type="number"
+            class="sheet-carac sheet-float-right"
+            name="attr_int"
+            value="0"
+          />
+        </label>
+        <!-- Vol -->
+        <label class="sheet-label">
+          <input type="radio" name="attr_ability" value="@{vol}" />
+          Volonté
+          <input
+            type="number"
+            class="sheet-carac sheet-float-right"
+            name="attr_vol"
+            value="0"
+          />
+        </label>
+        <!-- Cha -->
+        <label class="sheet-label">
+          <input type="radio" name="attr_ability" value="@{cha}" />
+          Charme
+          <input
+            type="number"
+            class="sheet-carac sheet-float-right"
+            name="attr_cha"
+            value="0"
+          />
+        </label>
+        <br />
+        <!-- Vitalité -->
+        <h2>Vitalité</h2>
+        <label>
+          Physique&nbsp;
+          <select class="sheet-ability sheet-float-right" name="attr_phy">
+            <option value="0">Choisir</option>
+            <option value="1">Minime</option>
+            <option value="2">Petit</option>
+            <option value="3" selected>Moyen</option>
+            <option value="4">Grand</option>
+            <option value="5">Enorme</option>
+            <option value="6">Colossal</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Endurance
+          <span class="sheet-float-right">
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_end"
+              value="0"
+              readonly
+            />
+          </span>
+        </label>
+        <div class="sheet-my-15">
+          Valide
+          <span class="sheet-float-right">
+            <input
+              type="number"
+              class="sheet-small sheet-right"
+              name="attr_vit_valid"
+              value="0"
+            />/
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_end"
+              value="0"
+              readonly
+            />
+          </span>
+        </div>
+        <div class="sheet-my-15">
+          Blessé
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_injured" value="1" />
+            <input
+              type="number"
+              class="sheet-small sheet-right"
+              name="attr_vit_injured"
+              value="0"
+            />/
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_end"
+              value="0"
+              readonly
+            />
+          </span>
+        </div>
+        <div class="sheet-my-15">
+          Critique
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_critical" value="1" />
+            <input
+              type="number"
+              class="sheet-small sheet-right"
+              name="attr_vit_critical"
+              value="0"
+            />/
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_end"
+              value="0"
+              readonly
+            />
+          </span>
+        </div>
+        <div>
+          <b>Dommages</b>
+          <span class="sheet-float-right">
+            <input
+              type="number"
+              class="sheet-right"
+              name="attr_damage"
+              value="0"
+            />
+            <button type="action" class="sheet-picto-btn" name="act_damage">
+              k
+            </button>
+          </span>
+        </div>
+        <br />
+        <h2>Actions</h2>
+        <label>
+          Mobilité
+          <span class="sheet-float-right">
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_mob"
+              value="0"
+              readonly
+            />
+          </span>
+        </label>
+        <label>
+          Pts d'action
+          <span class="sheet-float-right">
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_pa_val"
+              value="3"
+              readonly
+            />
+          </span>
+        </label>
+        <br />
+        <!-- Conditions -->
+        <h2>Conditions</h2>
+        <div class="sheet-my-5">
+          <b>Entravé</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_restrained" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Etourdi</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_stunned" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Immobilisé</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_incapacitated" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Fatigué</b>
+          <ul>
+            <li>
+              <b>Affaibli</b>
+              <span class="sheet-float-right">
+                <input type="checkbox" name="attr_cond_weakened" value="1" />
+              </span>
+            </li>
+            <li>
+              <b>Abattu</b>
+              <span class="sheet-float-right">
+                <input type="checkbox" name="attr_cond_wornout" value="1" />
+              </span>
+            </li>
+            <li>
+              <b>Epuisé</b>
+              <span class="sheet-float-right">
+                <input type="checkbox" name="attr_cond_exhausted" value="1" />
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div class="sheet-my-5">
+          <b>Inconscient</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_unconscious" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Mourant</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_dying" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Renversé</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_prone" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Surpris</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_surprised" value="1" />
+          </span>
+        </div>
+      </div>
+      <!-- COMPETENCES -->
+      <div class="sheet-col sheet-px-10">
+        <h2>Compétences</h2>
+        <br />
+        <fieldset class="repeating_skills">
+          <div class="sheet-skill-group">
+            <button
+              type="roll"
+              name="rollskill"
+              value="&{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{skillmod} + (@{diffmod}) ]] - @{target_num} ]] {{name=@{character_name} }} {{subtype=Test de compétence}} {{ability=@{ability_short} : @{ability}}} {{skill=@{skillname} : @{skillmod}}} {{difficulty=@{diffmod}}} {{throw=$[[0]]}} {{check=$[[1]]}} {{quality=$[[2]]}}"
+            ></button>
+            <input type="hidden" name="attr_skillname" value="" />
+            <span name="attr_skillname"></span>
+            <input
+              type="number"
+              class="sheet-skill sheet-float-right"
+              name="attr_skillmod"
+              value="0"
+            />
+            <input type="hidden" name="attr_skillattr" value="" />
+          </div>
+        </fieldset>
+      </div>
+      <div class="sheet-col sheet-px-10">
+        <!-- PSI -->
+        <h2>Facultés PSI</h2>
+        <div>
+          <label class="sheet-bio">Points PSI</label>
+          <input type="number" class="sheet-right" name="attr_psi" />/
+          <input type="number" class="sheet-right" name="attr_psi_max" />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="attr_psi_choice"
+            list="psiList"
+            value=""
+            placeholder="Nom du PSI"
+          />
+          <datalist id="psiList">
+            <option>Arts Martiaux</option>
+            <option>Barrière PSI</option>
+            <option>Conscience PSI</option>
+            <option>Guérison PSI</option>
+            <option>Intégration Mentale</option>
+            <option>Projection Astrale</option>
+            <option>Sixième Sens</option>
+            <option>Télékinésie</option>
+            <option>Télépathie</option>
+          </datalist>
+          <button type="action" class="sheet-picto-btn" name="act_addpsi">
+            +
+          </button>
+        </div>
+        <fieldset class="repeating_psis">
+          <div class="sheet-talent-group">
+            <details>
+              <summary>
+                <button
+                  type="roll"
+                  name="rollpsi"
+                  value="&{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{psimod} + (@{diffmod}) ]] - @{target_num} ]] {{name=@{character_name} }} {{subtype=Test de talent PSI}} {{ability=@{ability_name} : @{ability}}} {{skill=@{psiname} : @{psimod}}} {{difficulty=@{diffmod}}} {{throw=$[[0]]}} {{check=$[[1]]}} {{quality=$[[2]]}}"
+                ></button>
+                <span name="attr_psiname"></span>
+                <input
+                  type="number"
+                  class="sheet-skill sheet-float-right"
+                  name="attr_psimod"
+                  value="0"
+                />
+                <button
+                  type="roll"
+                  class="sheet-picto-btn sheet-flat-btn sheet-float-right"
+                  name="roll_psidesc"
+                  value="&{template:eg} {{name=@{character_name} }} {{subtype=@{psiname} }} {{description=?{Rang|1,@{psidesc1}|2,@{psidesc2}|3,@{psidesc3}|4,@{psidesc4}|5,@{psidesc5}|6,@{psidesc6}|Tous,@{psidesc}} }}"
+                >
+                  w
+                </button>
+              </summary>
+              <input
+                type="hidden"
+                class="sheet-talent"
+                name="attr_psiname"
+                value=""
+              />
+              <textarea
+                name="attr_psidesc"
+                placeholder="Description des talents..."
+              ></textarea>
+              <input type="hidden" name="attr_psidesc1" value="" />
+              <input type="hidden" name="attr_psidesc2" value="" />
+              <input type="hidden" name="attr_psidesc3" value="" />
+              <input type="hidden" name="attr_psidesc4" value="" />
+              <input type="hidden" name="attr_psidesc5" value="" />
+              <input type="hidden" name="attr_psidesc6" value="" />
+            </details>
+          </div>
+        </fieldset>
+        <!-- TALENTS -->
+        <br />
+        <h2>Talents</h2>
+        <div>
+          <input
+            type="text"
+            name="attr_talent_choice"
+            list="talentList"
+            value=""
+            placeholder="Nom de l'atout"
+          />
+          <datalist id="talentList">
+            <optgroup value="Traits">
+              <option value="[Traits]">Traits</option>
+              <option>Agile</option>
+              <option>Attentif</option>
+              <option>Affable</option>
+              <option>Attirant</option>
+              <option>Calme</option>
+              <option>Eloquent</option>
+              <option>Imposant</option>
+              <option>Intuitif</option>
+              <option>Persévérant</option>
+              <option>Puissant</option>
+              <option>Résistant</option>
+            </optgroup>
+            <optgroup value="Spécialités">
+              <option value="[Spécialités]">Spécialités</option>
+              <option>Acrobate</option>
+              <option>Artilleur</option>
+              <option>Astrogateur</option>
+              <option>Aviateur</option>
+              <option>Canonnier</option>
+              <option>Chasseur</option>
+              <option>Conducteur</option>
+              <option>Contrebandier</option>
+              <option>Craqueur</option>
+              <option>Ecuyer</option>
+              <option>Fleuriste</option>
+              <option>Grimpeur</option>
+              <option>Ingénieur Varlet</option>
+              <option>Légiste</option>
+              <option>Marin</option>
+              <option>Méchanaute</option>
+              <option>Négociant</option>
+              <option>Parkour</option>
+              <option>Passe-passe</option>
+              <option>Pied spatial</option>
+              <option>Pilote</option>
+              <option>Pisteur</option>
+              <option>Saboteur</option>
+              <option>Secouriste</option>
+              <option>Sensoriste</option>
+              <option>Sprinteur</option>
+              <option>Universitaire</option>
+              <option>Urgentiste</option>
+              <option>Vigilant</option>
+            </optgroup>
+            <optgroup value="Techniques martiales">
+              <option value="[Techniques martiales]">
+                Techniques martiales
+              </option>
+              <option>Attaque précise</option>
+              <option>Attaque puissante</option>
+              <option>Attaque sournoise</option>
+              <option>Berserker</option>
+              <option>Défaut de l'armure</option>
+              <option>Enchainement</option>
+              <option>Esquive</option>
+              <option>Lutte</option>
+              <option>Parade</option>
+              <option>Riposte</option>
+              <option>Second souffle</option>
+            </optgroup>
+            <optgroup value="Aptitudes">
+              <option value="[Aptitudes]">Aptitudes</option>
+              <option>Affinité animale</option>
+              <option>Chanceux</option>
+              <option>Cyberphile</option>
+              <option>Débrouillard</option>
+              <option>Entrainement simstim</option>
+              <option>Expertise</option>
+              <option>Infatigable</option>
+              <option>Jugeote</option>
+              <option>PSI latent</option>
+              <option>Récupération rapide</option>
+              <option>Robuste</option>
+              <option>Sens aiguisé</option>
+              <option>Vitalité débordante</option>
+              <option>Xénophile</option>
+            </optgroup>
+          </datalist>
+          <button type="action" class="sheet-picto-btn" name="act_addtalent">
+            +
+          </button>
+        </div>
+        <fieldset class="repeating_talents">
+          <div class="sheet-talent-group">
+            <details>
+              <summary><span name="attr_talentname"></span></summary>
+              <input type="checkbox" name="attr_talentuse" value="1" />&nbsp;
+              <input
+                type="text"
+                class="sheet-talent"
+                name="attr_talentname"
+                value=""
+                placeholder="Nom du talent"
+              />
+              <textarea
+                name="attr_talentdesc"
+                placeholder="Description du talent..."
+              ></textarea>
+              Atout ?&nbsp;<input type="checkbox" name="attr_asset" value="1" />
+              &nbsp;Util. jour :
+              <input
+                type="number"
+                class="sheet-small sheet-right"
+                name="attr_daily"
+                value=""
+              />
+            </details>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <!-- Tab 2 : équipement -->
+  <div class="sheet-gear">
+    <div class="sheet-2colrow">
+      <div class="sheet-col">
+        <h2>Caractère</h2>
+        <textarea name="attr_background" rows="10"></textarea>
+        <br />
+        <h2>Casier judiciaire</h2>
+        <textarea name="attr_notes" rows="10"></textarea>
+        <br />
+        <h2>Notes</h2>
+        <textarea name="attr_notes" rows="10"></textarea>
+      </div>
+      <div class="sheet-col">
+        <div>
+          <label class="sheet-w-25"
+            ><span class="sheet-w-25">Crédits</span>:&nbsp;
+            <input type="text" class="sheet-right" name="attr_credits" />
+          </label>
+        </div>
+        <div>
+          <label
+            ><span class="sheet-w-25">Pérédène</span>:&nbsp;
+            <input type="radio" name="attr_peredene" value="-" /><span
+              class="sheet-px-10"
+              >-</span
+            >
+            <input type="radio" name="attr_peredene" value="A" /><span
+              class="sheet-px-10"
+              >A</span
+            >
+            <input type="radio" name="attr_peredene" value="B" /><span
+              class="sheet-px-10"
+              >B</span
+            >
+            <input type="radio" name="attr_peredene" value="C" /><span
+              class="sheet-px-10"
+              >C</span
+            >
+          </label>
+        </div>
+        <h2>Equipement</h2>
+        <fieldset class="repeating_gear">
+          <input
+            type="text"
+            name="attr_gearname"
+            class="sheet-w-100"
+            placeholder="Nom..."
+          />
+          <textarea
+            class="sheet-notes"
+            name="attr_geardesc"
+            rows="3"
+            placeholder="Description..."
+          ></textarea>
+          <input
+            type="text"
+            name="attr_gearprops"
+            class="sheet-w-100 sheet-my-5"
+            placeholder="Propriétés..."
+          />
+        </fieldset>
+        <br />
+        <h2>Augmentations</h2>
+        <fieldset class="repeating_cyber">
+          <input
+            type="text"
+            name="attr_augname"
+            class="sheet-w-100"
+            placeholder="Nom..."
+          />
+          <textarea
+            class="sheet-notes"
+            name="attr_augdesc"
+            rows="3"
+            placeholder="Description..."
+          ></textarea>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <!-- Tab 3 : configuration -->
+  <div class="sheet-config">
+    <div class="sheet-2colrow">
+      <div class="sheet-col sheet-my-5">
+        <ul>
+          <li>
+            Paramètres
+            <ul>
+              <li>
+                <span class="sheet-w-33">Score Cible</span>:&nbsp;
+                <input
+                  type="number"
+                  class="sheet-small sheet-right"
+                  name="attr_target_num"
+                  value="9"
+                />
+              </li>
+            </ul>
+          </li>
+          <li>
+            Bonus
+            <ul>
+              <li>
+                <span class="sheet-w-33">Endurance</span>:&nbsp;
+                <input
+                  type="number"
+                  class="sheet-small sheet-right"
+                  name="attr_end_mod"
+                  value="0"
+                />&nbsp;
+              </li>
+              <li>
+                <span class="sheet-w-33">Mobilité</span>:&nbsp;
+                <input
+                  type="number"
+                  class="sheet-small sheet-right"
+                  name="attr_mob_mod"
+                  value="0"
+                />
+              </li>
+              <li>
+                <span class="sheet-w-33">Points d'Action</span>:&nbsp;
+                <input
+                  type="number"
+                  class="sheet-small sheet-right"
+                  name="attr_pa_mod"
+                  value="0"
+                />
+              </li>
+              <li>
+                <span class="sheet-w-33">Points PSI</span>:&nbsp;
+                <input
+                  type="number"
+                  class="sheet-small sheet-right"
+                  name="attr_psi_mod"
+                  value="0"
+                />
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="sheet-col">
+        <em>Historique des versions</em>
+        <span class="sheet-float-right">
+          v<span name="attr_sheet_ver"></span>&nbsp;
+        </span>
+        <ul>
+          <li>
+            Version 1.0.0 (2022-09)
+            <ul>
+              <li>Version initiale</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+    <div class="sheet-2colrow">
+      <div class="sheet-col">
+        <input
+          type="checkbox"
+          class="sheet-toggle-show"
+          name="attr_show_conditions"
+          value="1"
+        />
+        <span>Explication conditions :</span>
+        <div class="sheet-hidden-block">
+          <textarea name="attr_char_conditions"></textarea>
+        </div>
+      </div>
+      <div class="sheet-col">
+        <input type="checkbox" class="sheet-toggle-show" />
+        <span>Explication jet :</span>
+        <div class="sheet-hidden-block">
+          <span name="attr_roll_conditions"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROLL TEMPLATE -->
+<rolltemplate class="sheet-rolltemplate-eg">
+  <div class="sheet-template-wrap">
+    <div class="sheet-title">
+      <h3 class="sheet-title">{{name}}</h3>
+    </div>
+    {{#subtype}}
+    <h5 class="sheet-title">{{subtype}}</h5>
+    {{/subtype}} {{#throw}}
+    <div class="sheet-mt-5">Jet <span class="sheet-prop">{{throw}}</span></div>
+    {{/throw}} {{#ability}}
+    <div>Attribut <span class="sheet-prop">{{ability}}</span></div>
+    {{/ability}} {{#skill}}
+    <div>Compétence <span class="sheet-prop">{{skill}}</span></div>
+    {{/skill}} {{#psi}}
+    <div>Talent PSI <span class="sheet-prop">{{psi}}</span></div>
+    {{/psi}} {{#difficulty}}
+    <div>MOD <span class="sheet-prop">{{difficulty}}</span></div>
+    {{/difficulty}} {{#check}}
+    <div class="sheet-mt-5">
+      Test
+      <span class="sheet-prop">{{check}}</span>
+    </div>
+    {{/check}} {{#quality}}
+    <div class="sheet-mt-5">
+      (Qualité)
+      <span class="sheet-prop">({{quality}})</span>
+    </div>
+    {{/quality}} {{#rollTotal() quality 0}}
+    <div class="sheet-mt-5 sheet-success">
+      <span class="sheet-margin">Succès Marginal...</span>
+    </div>
+    {{/rollTotal() quality 0}} {{#rollBetween() quality 1 5}}
+    <div class="sheet-mt-5 sheet-success">
+      <span>Succès !</span>
+    </div>
+    {{/rollBetween() quality 1 5}} {{#rollGreater() quality 5}}
+    <div class="sheet-mt-5 sheet-success">
+      <span class="sheet-major">Succès Majeur !!</span>
+    </div>
+    {{/rollGreater() quality 5}} {{#rollTotal() quality -1}}
+    <div class="sheet-mt-5 sheet-failure">
+      <span class="sheet-margin">Echec Marginal...</span>
+    </div>
+    {{/rollTotal() quality -1}} {{#rollBetween() quality -5 -2}}
+    <div class="sheet-mt-5 sheet-failure">
+      <span>Echec !</span>
+    </div>
+    {{/rollBetween() quality -5 -2}} {{#rollLess() quality -5}}
+    <div class="sheet-mt-5 sheet-failure">
+      <span class="sheet-major">Echec Majeur !!</span>
+    </div>
+    {{/rollLess() quality -5}} {{#description}}
+    <div class="sheet-txt-small">{{description}}</div>
+    {{/description}}
+  </div>
+</rolltemplate>
+
+<!-- SHEET WORKER -->
+<script type="text/worker">
+
+  const buttonList = ["character", "gear", "config"];
+
+  const DICE_ROLL = "2d6";
+  const BOON_ROLL = "3d6dl1";
+  const BANE_ROLL = "3d6dh1";
+  const CANT_ROLL = "0d0";
+
+  const careerList = {
+    "Aventurier": [],
+    "Prêtre": [
+      "Novice",
+      "Adepte",
+      "Acolyte",
+      "Révérend",
+      "Patriarche",
+      "Sage"
+    ],
+    "Soldat": [
+      "Caporal",
+      "Sergent",
+      "Lieutenant",
+      "Capitaine",
+      "Major",
+      "Colonel"
+    ],
+    "Marchand": [
+      "Commis",
+      "Courtier",
+      "Vendeur",
+      "Acheteur",
+      "Manageur",
+      "Magnat"
+    ],
+    "Navyborg": [
+      "Aspirant",
+      "Maître",
+      "Enseigne",
+      "Lieutenant",
+      "Capitaine",
+      "Commandant"
+    ],
+    "Tekno": [
+      "Apprenti",
+      "Réparateur",
+      "Technicien",
+      "Ingénieur",
+      "Concepteur",
+      "Architecte"
+    ]
+  }
+
+  const physicalAbilities = [
+    { attr: "@{for}", name: "Force" },
+    { attr: "@{hab}", name: "Habileté" },
+    { attr: "@{viv}", name: "Vivacité" },
+  ];
+
+  const mentalAbilities = [
+      { attr: "@{int}", name: "Intellect" },
+      { attr: "@{vol}", name: "Volonté" },
+      { attr: "@{cha}", name: "Charme" },
+    ];
+
+  const abilities = [
+    ...physicalAbilities,
+    ...mentalAbilities
+  ];
+
+  const conditions = [
+    { id: "injured", name: "Blessé-e", desc: "" },
+    { id: "critical", name: "Critique", desc: "" },
+    { id: "restrained", name: "Entravé-e", desc: "" },
+    { id: "stunned", name: "Etourdi-e", desc: "" },
+    { id: "incapacitated", name: "Immobilisé-e", desc: "" },
+    { id: "weakened", name: "Affaibli-e", desc: "" },
+    { id: "wornout", name: "Abattu-e", desc: "" },
+    { id: "exhausted", name: "Epuisé-e", desc: "" },
+    { id: "unconscious", name: "Inconscient-e", desc: "" },
+    { id: "dying", name: "Mourant-e", desc: "" },
+    { id: "prone", name: "Renversé-e", desc: "" },
+    { id: "surprised", name: "Surpris-e", desc: "" },
+  ];
+
+  const mobilityList = ["phy", "hab", "mob_mod"];
+
+  const skillList = [
+    { name:"Administration", attr:"skill_admin" },
+    { name:"Armes lourdes", attr:"skill_hweapons" },
+    { name:"Athlétisme", attr:"skill_athlectics" },
+    { name:"Combat Contact", attr:"skill_melee" },
+    { name:"Combat Distance", attr:"skill_ranged" },
+    { name:"Combat Mains Nues", attr:"skill_hand" },
+    { name:"Commandement", attr:"skill_command" },
+    { name:"Commerce", attr:"skill_trading" },
+    { name:"Conduite", attr:"skill_driving" },
+    { name:"Coordination", attr:"skill_coordination" },
+    { name:"Culture Galactique", attr:"skill_culture" },
+    { name:"Discrétion", attr:"skill_stealth" },
+    { name:"Etiquette", attr:"skill_etiquette" },
+    { name:"Imposture", attr:"skill_deception" },
+    { name:"Infocom", attr:"skill_infocom" },
+    { name:"Intuition", attr:"skill_insight" },
+    { name:"Magouilles", attr:"skill_fiddling" },
+    { name:"Mecs", attr:"skill_mechs" },
+    { name:"Médecine", attr:"skill_medicine" },
+    { name:"Méditation", attr:"skill_meditation" },
+    { name:"Observation", attr:"skill_notice" },
+    { name:"Persuasion", attr:"skill_persuasion" },
+    { name:"Pilotage", attr:"skill_piloting" },
+    { name:"Pilote TL", attr:"skill_ftl_pilot" },
+    { name:"Sciences", attr:"skill_sciences" },
+    { name:"Séduction", attr:"skill_charm" },
+    { name:"Survie", attr:"skill_survival" },
+    { name:"Tactique", attr:"skill_tactics" },
+    { name:"Technologie", attr:"skill_technology" },
+    { name:"Varlet", attr:"skill_varlet" }
+  ];
+
+  const psiList = [
+    {
+      name: "Arts Martiaux",
+      ranks: [
+        { talents: [
+          {
+            name:"Armure naturelle",
+            desc:"S’il est la cible d’un attaque et qu’il réussit un test d’Arts Martiaux en réaction au prix d’1 PA, le personnage peut bander ses muscles et renforcer la protection naturelle de son épiderme, le rendant aussi rigide que du cuir. Cela lui permet de bénéficier d’une protection supplémentaire de 2/0'. Celle-ci passe à 4/0 lorsque le personnage acquiert le degré 4 en Arts Martiaux. Il doit dépenser 1 PP à chaque tour pour prolonger la durée d’effet du talent (sans dépenser de PA)." }
+          ]
+        },
+        { talents:[
+          {
+            name:"Grêle de coups (2)",
+            desc:"Le personnage peut attaquer le même adversaire deux fois, au prix d’un PA.\n En pratique, les 2 PP sont dépensés, puis on effectue les tests d’attaques d’Arts Martiaux.\n Par ailleurs, le personnage obtient gratuitement 1 point d’Action supplémentaire par tour."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Grêle de coups (3)",
+            desc:"Le personnage peut attaquer le même adversaire trois fois, ou bien deux adversaires différents une fois, au prix d’un PA.\n En pratique, les 3 PP sont dépensés, puis on effectue les tests d’Arts Martiaux. Si le personnage doit se déplacer entre les deux adversaires, sa deuxième attaque subit une Complication."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Grêle de coups (4)",
+            desc:"Le personnage peut attaquer le même adversaire quatre fois, ou bien deux adversaires différents deux fois au prix d’un PA.\n En pratique, les 4 PP sont dépensés, puis on effectue les tests d’Arts Martiaux. Si le personnage doit se déplacer entre les deux adversaires, sa troisième et sa quatrième attaques subissent une Complication.\n Par ailleurs, le personnage obtient 1 nouveau point d’Action supplémentaire par tour (soit +2 PA au total)."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Neutralisation",
+            desc:"Une fois par tour, le personnage peut effectuer une attaque spéciale et viser le centre nerveux d’un adversaire en dépensant 5 PP et en réussissant un test d’Arts Martiaux. Si la tentative de neutralisation réussit, la victime devient Inconsciente. La durée de son inconscience est un nombre de minutes égal au jet de dommages (1d6 + Volonté).\n Lorsqu’il atteint le degré 6, le personnage peut utiliser cette attaque spéciale deux fois par tour."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Défense",
+            desc:"Le personnage bénéficie d’un Atout lorsqu’il souhaite bloquer ou éviter une attaque, que son adversaire manie une arme de contact ou pas. Il ne subit pas de Complication à ses tests de riposte. Il peut également essayer d’éviter un tir d’arme à distance (de jet, à projectile ou à rayon).\n En pratique, les 6 PP sont dépensés, mais le personnage doit rester sur la défensive pendant son tour (il ne doit porter aucune attaque).\n Par ailleurs, le personnage obtient 1 nouveau point d’Action supplémentaire par tour (soit +3 PA au total)."
+          }
+          ]
+        },
+      ],
+    },
+    {
+      name: "Barrière PSI",
+      desc: "Le personnage peut créer autour de lui une bulle de protection empêchant tout usage de talent PSI à son encontre. Il peut aussi faire bénéficier de cette protection un nombre d'Êtres égal au degré de Barrière PSI atteint.\n Cette faculté PSI se déclenche inconsciemment, en réflexe à toute tentative d’utilisation d’un talent quelconque sur le personnage. Il doit dépenser le même nombre de Points PSI que son adversaire et effectuer un test de Barrière PSI en opposition. Si le talent utilisé à son encontre est d’un degré supérieur à son degré acquis, ce test subit une Complication.\n S’il réussit ce test de défense, il parvient à annuler les effets du talent qui le vise.",
+      ranks: [],
+    },
+    {
+      name: "Conscience PSI",
+      ranks: [
+        { talents:[
+          {
+            name:"Insensibilité thermique",
+            desc:"Le personnage peut résister à des climats extrêmes et des températures de -50 à +50°C, plus 20°C par degré supplémentaire (un personnage de degré 6 résiste ainsi à des températures de -150 à +150°C). Ce talent dure un nombre de minutes égal au degré acquis du personnage, délai au bout duquel chaque minute supplémentaire lui fait dépenser 1 nouveau PP."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name: "Récupération",
+            desc:"Le personnage divise par deux le temps nécessaire pour éliminer les conditions Affaibli, Abattu et Epuisé. De plus, s'il sombre dans l'inconscience suite à l'épuisement ou à des chocs (mais pas suite à des blessures), il revient automatiquement à lui au bout d'une minute."
+          },
+          {
+            name: "Survie",
+            desc:"Le personnage est capable de mieux gérer ses besoins vitaux. S'il réussit son test, il multiplie par son degré de Conscience PSI la durée pendant laquelle il peut être privé de nourriture, d'eau, de sommeil, voire d'air respirable."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Animation suspendue",
+            desc:"Ce talent est une forme de catalepsie volontaire permettant au personnage de survivre sans manger ni boire et en respirant très lentement pendant un nombre maximum de semaines égal à son degré acquis auquel s’ajoute sa valeur de Volonté. Un personnage Mourant peut aussi ralentir la dégradation de son état en attendant des soins : il bénéficie d’un Atout à ses tests de Volonté, et à chaque test réussi, son délai de survie est prolongé d’une minute."
+          },
+          {
+            name:"Sens affûtés",
+            desc:"Ce talent permet au personnage d’augmenter l’acuité de l’un de ses sens, en étendue, en portée et en finesse. Concrètement, tout test mettant en œuvre le sens amélioré bénéficie d’un Atout.\n • Goût/Odorat : le personnage peut discerner toutes les saveurs d’une préparation culinaire, y compris la présence d’une substance toxique. Il peut identifier un individu par son odeur et littéralement renifler une piste.\n • Ouïe : le personnage peut entendre des sons normalement inaudibles (ultrasons, infrasons), ou isoler des sons spécifiques au milieu d’un vacarme (une conversation dans un souk bruyant ou des chuchotements couverts par le vrombissement d’un moteur NT3).\n • Vision : le personnage voit dans la pénombre la plus épaisse mais sans distinguer les couleurs, distingue les infrarouges en cas d’obscurité absolue, il peut aussi discerner de minuscules détails à de grandes distances à la manière d’un rapace.\n • Toucher : le personnage est capable de détecter des micro-variations de texture sur une surface matérielle, ou encore le subtil filet d’air trahissant la présence d’un passage dissimulé à proximité.\n • Equilibre : le personnage semble doté d’un gyroscope interne tant sa coordination physique est parfaite, et il devient totalement immunisé au vertige et à la cinétose.\n Au degré 6, le personnage peut affûter deux de ses sens en même temps."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Régénération",
+            desc:"Le personnage peut accélérer la guérison de ses blessures. En pratique, il fait un test à la fin de chaque journée de convalescence et en cas de succès, il multiplie par deux le nombre de points d’Endurance récupérés."
+          },
+          {
+            name: "Défense anti-infections",
+            desc:"Les défenses immunitaires du personnages sont exceptionnellement développées. Lorsqu'il subit l'agression d'un agent pathogène quelconque (infection virale ou bactérienne au degré 4, poison ou drogue au degré 5), il peut se plonger dans un état léthargique similaire à l'animation suspendue. Cette catalepsie dure un nombre d'heures égal à la Virulence du pathogène. A son réveil, le personnage en a complètement neutralisé les effets."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Prouesses physiques",
+            desc:"Ce talent permet au personnage d'augmenter ses capacités athlétiques. Il choisit quel attribut améliorer entre Force ou Habileté. Pour toute action mettant en jeu l’attribut choisi, le personnage bénéficie d’un Atout à son test pendant la durée d’utilisation du talent. Au degré 6, il peut améliorer Force et Habileté conjointement, pendant 10 minutes."
+          },
+          {
+            name:"Défense anti-poisons",
+            desc:"Les défenses immunitaires du personnages sont exceptionnellement développées. Lorsqu'il subit l'agression d'un agent pathogène quelconque (infection virale ou bactérienne au degré 4, poison ou drogue au degré 5), il peut se plonger dans un état léthargique similaire à l'animation suspendue. Cette catalepsie dure un nombre d'heures égal à la Virulence du pathogène. A son réveil, le personnage en a complètement neutralisé les effets."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Communion éthérale",
+            desc:"Le personnage peut puiser son énergie PSI dans le continuum éthéral du Grand Univers. En pratique, cela se traduit par une dépense de points PSI réduite d’un degré. Par conséquent, tous les talents de degré 1 maîtrisés par le personnage s'activent sans dépenser aucun PP (mais pas sans faire un test de talent PSI)."
+          },
+          {
+            name:"Longévité",
+            desc:"Un personnage maîtrisant la faculté Conscience PSI au degré 6 agit passivement sur le vieillissement de son corps. Il n’a pas besoin d’injection de Pérédène pour atteindre l’âge biologique maximum."
+          }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Guérison PSI",
+      desc: "Le personnage peut stimuler le processus de guérison de n'importe quel Être par simple contact physique.\n • Si le guérisseur utilise ses talents sur lui-même, il met en œuvre sa Volonté.\n • S’il exerce ses talents sur autrui, c’est son Charme qu’il met à contribution.",
+      ranks: [
+        { talents:[
+          {
+            name:"Douleur",
+            desc:"Le personnage est capable de supprimer la douleur et d'éviter que le patient subisse les effets de ses blessures pendant un nombre d'heures égal au degré acquis. Un patient Blessé n’est plus entravé dans ses actions, et peut se déplacer à sa Mobilité normale par ses propres moyens. Un patient Critique subit les effets de la condition Epuisé et ne peut se déplacer qu’avec le soutien d’un compagnon. La dégradation de l'état de santé est également stoppée (la vie d’un blessé Mourant n’est pas en danger)."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Soin empathique",
+            desc:"Le guérisseur PSI peut 'échanger sa santé' avec celle d'un autre Être de la même chimie que lui. Il peut ainsi réduire la gravité des blessures de son patient et en prendre délibérément une partie sur lui.\n En pratique, pour chaque test de Soin Empathique réussi, il fait récupérer à son patient un nombre de points d’Endurance égal à la somme de son degré de Guérison PSI et de sa Volonté ou de son Charme (selon l’attribut utilisé), mais subit lui-même en contre-partie un niveau de Fatigue. Une fois le transfert de santé effectué, le patient guérit normalement (s'il lui reste des blessures non soignées), tandis que le guérisseur commence lui-même à éliminer la Fatigue à un rythme accéléré : une heure de repos par niveau de Fatigue au lieu de huit."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Guérison des blessures",
+            desc:"Le personnage est capable d'accélérer le processus de guérison d’un blessé selon des modalités similaires à celles du talent de Soin Empathique, à la différence qu'il n'a pas besoin de subir lui-même des niveaux de Fatigue."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Soin maladie infectieuse",
+            desc:"Le personnage peut guérir n'importe quel type de maladie causée par des microbes. Au bout d'un nombre de minutes égal à la Virulence de la maladie multipliée par 10, le personnage ou son patient sort de sa transe méditative, entièrement guéri."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Soin maladie virale",
+            desc:"Le personnage peut guérir n'importe quel type d'affection causée par des virus. Au bout d'un nombre de minutes égal à la Virulence de la maladie multipliée par 10, le personnage ou son patient sort de sa transe méditative, entièrement guéri."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Soin empoisonnement",
+            desc:"Le personnage peut enrayer un empoisonnement ou une grave intoxication alimentaire, comme s'il administrait un antipoison spécifique à son patient. Au bout d'un nombre de minutes égal à la Virulence du poison ou de la drogue multipliée par 10, le personnage ou son patient en a totalement annulé les effets."
+          }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Intégration Mentale",
+      ranks: [
+        { talents: [
+          {
+            name:"Calculateur prodige",
+            desc: "Le personnage peut donner la solution d'une série de calculs mathématiques. Le temps entre chaque tentative est de 1 minute. Ce talent ne peut en aucun cas s'appliquer à des connaissances, matériaux, techniques ou faits d'un NT supérieur à 3."
+          },
+          {
+            name:"Transe mémorielle",
+            desc: "• Le personnage peut entrer en phase de mémorisation : il enregistre alors avec une précision totale tout ce qu’il voit et entend. Ceci lui coûte 1 Point PSI par minute de mémorisation et l'empêche de se livrer à toute autre activité. A n’importe quel moment ultérieur, il pourra consulter cet enregistrement cérébral, exactement comme on consulte une banque de données. Cette consultation a posteriori est appelée 'rétrospection'.\n • Grâce à la rétrospection, le personnage peut tenter d'utiliser sa prodigieuse mémoire avec des données qu'il n'a pas expressément enregistrées : dans ce cas, il doit dépenser 2 Points PSI pour 'retrouver' ces informations et devra éventuellement réussir un test d’Observation basé sur la Vivacité s'il cherche à se rappeler d'un détail précis (MOD à la discrétion du MJ) auquel il n’aurait pas forcément prêté attention lors de la phase de mémorisation. Chaque rétrospection peut ainsi restituer le 'contenu' d’une scène entière. Elle suppose par ailleurs un état de transe méditative, incompatible avec une autre activité."
+          }
+          ]
+        },
+        { talents: [
+          {
+            name:"Ordinateur NT4",
+            desc:"Le personnage devient capable de manipuler des données et des abstractions, et de s'attaquer à des problèmes impliquant des connaissances de NT4. Le temps de résolution des calculs et donc le délai entre chaque tentative d'intégration mentale est de 30 secondes par NT du problème."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Ordinateur NT5",
+            desc:"Le personnage peut intégrer des problèmes impliquant des connaissances de NT5. Le temps de résolution des calculs et donc le délai entre chaque tentative d'intégration mentale est de 15 secondes par NT du problème."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Ordinateur NT6",
+            desc:"Le personnage peut intégrer des problèmes impliquant des connaissances de NT6. Le temps de résolution des calculs et donc le délai entre chaque tentative d'intégration mentale est de 10 secondes par NT du problème."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Infosphère NT6",
+            desc:"Le personnage peut se brancher sur une banque de données par l'intermédiaire d'un plot vertébral. Le temps de résolution des calculs et donc le délai entre chaque tentative d'intégration mentale est de 5 secondes par NT du problème."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Banque de données",
+            desc:"Même utilisation qu'au degré 5, mais le personnage sert lui-même de banque de données. Il doit cependant les 'rafraîchir' une heure par mois en appariant son plot vertébral à une banque de données classique. Il subit une Complication à ses tests s’il passe plus d’un mois sans rafraichissement des données.\n De plus, pour des domaines très fluctuants (mode, actualité), le MJ est libre d’infliger cette Complication même si les données sont en principe à jour."
+          }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Projection Astrale",
+      desc: "Le personnage peut créer un double fantomatique et le projeter au loin, voire déplacer son être physique instantanément en transitant par le continuum astral du Grand Univers. Pour une raison inconnue, il est impossible de se projeter à l'intérieur d'un corps astronomique (planète, étoile, comète, trou noir), ou d'un navire à un autre lorsqu'ils sont dans le Triche-Lumière, ou encore dans la sphère des machines d'un vaisseau Lehouine.",
+      ranks: [
+        { talents:[
+          {
+            name:"Image",
+            desc:"Le personnage entre en transe et crée une projection astrale. Celle-ci se détache de son corps pour se rendre dans le lieu désiré où le personnage peut voir comme s'il était présent. La projection peut se déplacer à l'allure normale du personnage. Elle forme une image parfaitement visible d'autrui, mais reste impalpable et inaltérable. Elle est également sourde et muette."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Image & Son",
+            desc:"La projection astrale peut entendre et parler, mais non agir matériellement ni utiliser d'autres talents PSI. L'utilisation d'un terminal d'ordinateur ou d'un robot à commande vocale est possible."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Sensation complète",
+            desc:"La projection astrale acquiert une réalité quasi matérielle. Elle transmet au personnage toutes les sensations provoquées par le milieu où elle évolue. Elle peut y intervenir concrètement, mais elle peut aussi y subir des dommages (vide, flammes, atmosphère toxique, etc...) qui affectent le corps en transe."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Maitrise astrale",
+            desc:"La projection a les mêmes propriétés que celle créée par le talent de Sensation complète, mais le personnage peut choisir de rester invisible, inaudible, et de ne pas subir de dommages."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Téléportation",
+            desc:"Le personnage peut déplacer l'intégralité de son corps. Il ne peut cependant transporter que lui-même, ses prothèses et ses vêtements, ainsi que tout ce qui peut être englobé dans son aura astrale, un halo de quelques centimètres d'épaisseur qui suit les contours de son corps. Le personnage doit connaître les coordonnées PSI du lieu où il se matérialise, c'est-à-dire y être déjà passé."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Téléportation multi-cibles",
+            desc:"Le personnage peut déplacer vers le lieu désiré jusqu'à 6 Êtres, selon les mêmes modalités que la téléportation individuelle."
+          }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Sixième Sens",
+      ranks: [
+        { talents:[
+          {
+            name:"Hypervigilance",
+            desc:"Le personnage voit, entend et sent dans toutes les directions, devenant ainsi extrêmement difficile à surprendre, sauf bien entendu si l'agresseur est un missile arrivant de l'Espace et lancé à 10 km/s, ou quelque chose d'équivalent. La portée de ses sens reste cependant normale. Une fois en place, ce talent reste actif pendant 24 heures TU. Il est automatiquement interrompu par l'utilisation d'un autre talent PSI.\n Concrètement, le personnage obtient un Atout à tous ses tests d’initiative, et un adversaire potentiel doit réaliser une Prouesse à son test de Discrétion pour avoir une chance de le surprendre."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Hyperacuité",
+            desc:"Le personnage voit la portée et la finesse de tous ses sens doublées pendant une heure. Il peut se diriger et sentir les obstacles dans l'obscurité ou dans des conditions atmosphériques difficiles (brouillard, tempête, etc...), entendre des sons normalement inaudibles, renifler au sens propre une piste, sentir de microscopiques variations de texture... Tant que le talent est actif, tout test mettant en œuvre son acuité sensorielle bénéficie d'un Atout."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Sens du danger",
+            desc:"Le personnage est averti de l'imminence d'un danger dans les 5 minutes. Toutefois, il ne pourra en préciser la nature ni en localiser l'origine dans l'espace. La conscience du danger se manifestera physiologiquement : une sueur glacée coulera entre ses omoplates, ses poils ou ses cheveux se hérisseront, etc..."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Localisation du danger",
+            desc:"Le personnage doit d'abord avoir réussi un test de Sens du danger avant d'utiliser ce talent. S'il réussit, il localise approximativement l'origine du danger dans l'espace et à une minute près dans le temps. S’il réalise une Prouesse, le danger est localisé précisément dans l'espace et dans le temps. La nature exacte du danger reste cependant impénétrable à la perception du personnage."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Détection PSI",
+            desc:"Le personnage sent la présence d'une activité PSI à portée. Ce talent fonctionne même en cas de protection par un Ecran Mental, mais pas si l'autre personnage utilise une Barrière PSI. La matière n'est pas un obstacle à la détection. La source PSI n'est pas localisée précisément dans l'espace."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Détection de la vie",
+            desc:"Le personnage sent la présence à portée de créatures vivantes, actives, léthargiques ou en catalepsie. Les-dites créatures doivent avoir un degré d'évolution supérieur à celui du micro-organisme. Les conditions et limitations d'application sont les mêmes que pour la Détection des PSI."
+          }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Télékinésie",
+      desc:"Le personnage est capable d'agir à distance sur la matière pour soulever des objets de poids croissant avec sa maîtrise du talent, et peut même interagir avec l’énergie à haut degré. Le télékinésiste doit voir l'objet qu'il veut déplacer.",
+      ranks: [
+        { talents:[
+          {
+            name:"Psychokinèse 1",
+            desc:"Le personnage peut soulever, déplacer ou manipuler un objet d’une masse maximum de 100 grammes. Si un test d’utilisation de l’objet est nécessaire, le télékinésiste le manipule avec une Force ou une Habileté égale à la moitié de son degré acquis (+0)."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"PK2",
+            desc:"Le personnage peut soulever, déplacer ou manipuler (avec une Force ou une Habileté de +1) des objets d’une masse maximum de 1 kilo."
+          },
+          {
+            name:"Multi-cibles",
+            desc:"Il s'agit de soulever et de déplacer plusieurs objets en mettant en jeu des talents de degrés inférieurs dont la somme ne peut dépasser le degré de Télékinésie acquis. Par exemple, un télékinésiste de degré 2 peut manipuler deux objets de 100 grammes (2 x talent degré 1 = 2), un télékinésiste de degré 4 peut manipuler deux objets de 1 kilo (2 x degré 2 =4) et un télékinésiste de degré 6 peut manipuler trois objets de 1 kilo ou deux objets de 10 kilos.\n Pour chaque objet manipulé, le télékinésiste doit faire un test dont le MD dépend du poids à soulever. En cas d'échec à un seul des tests, c'est l'effet 'château de cartes' et tous les objets ciblés échappent au contrôle du télékinésiste."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"PK3",
+            desc:"Le personnage peut soulever, déplacer ou manipuler (avec une Force ou une Habileté de +1) des objets d’une masse maximum de 10 kilos."
+          },
+          {
+            name:"Bouclier TK",
+            desc:"Ce talent ne peut être utilisé qu'en présence d'une atmosphère ou d'un fluide. En cas de réussite, il permet au télékinésiste de repousser toute attaque à mains nues ou par Arts Martiaux. Il peut aussi détourner les attaques et tirs par armes de NT1 ou NT2 et diviser ainsi par deux les dommages physiques reçus.\n Au degré 4 du talent, le bouclier TK peut aussi détourner les tirs par armes NT3 et NT4 et diviser les dommages physiques reçus par deux. Le bouclier TK est inefficace contre un tir d'arme produisant des dommages radiants.\n En cas d'attaque par une Projection TK sur un télékinésiste de degré 3 ou plus, son Bouclier TK se déclenche de manière réflexe : si le défenseur réussit son test en opposition, il a annulé l'effet de la Projection TK."
+          },
+          {
+            name:"Projection TK",
+            desc:"Ce talent ne peut être utilisé que dans une atmosphère ou un fluide. Il permet de projeter vers la cible l'équivalent de la décharge d'une arme sonique. La portée maximale de la Projection TK est de cinq mètres par degré acquis. La victime peut la bloquer avec un Bouclier TK, ou l'éviter en réussissant un test d’Athlétisme ou de Coordination basé sur l’Habileté contre une Difficulté Formidable (MD -6)."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"PK4",
+            desc:"Le personnage peut soulever, déplacer ou manipuler (avec une Force ou une Habileté de +2) des objets d’une masse maximum de 100 kilos."
+          },
+          {
+            name:"Sustentation",
+            desc:"Ce talent permet au personnage de se soulever sans pour autant pouvoir se déplacer. Il peut aussi freiner une chute et atterrir sans dommages. L'altitude de base maximum à laquelle il peut s'élever dépend de son degré de talent :\n• Degré 4 : 100 mètres\n • Degré 5 : 1000 mètres\n • Degré 6 : 10000 mètres\n Le télékinésiste met toujours une dizaine de tours (60 secondes) à atteindre son plafond maximum, sa vitesse ascensionnelle est de 6 km/h au degré 4 et est multipliée par dix à chaque degré de progression.\n La hauteur depuis laquelle il peut chuter sans dommages est égale à un dixième de son altitude maximum."
+          },
+          {
+            name:"Neutralisation mécanique",
+            desc:"Le personnage peut neutraliser toute forme d’énergie mécanique et peut momentanément stopper un moteur utilisant des pièces mobiles (les dispositifs utilisant des champs de forces ou des ondes gravitiques ainsi que les propulseurs Varlet ne sont pas concernés)."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"PK5",
+            desc:"Le personnage peut soulever, déplacer ou manipuler (avec une Force ou une Habileté de +2) des objets d’une masse maximum de 1 tonne."
+          },
+          {
+            name:"Lévitation",
+            desc:"Ce talent permet au personnage de se soulever lui-même et de se déplacer à son allure normale. Il peut atteindre une altitude de base maximum de 100 mètres."
+          },
+          {
+            name:"Electrokinésie",
+            desc:"Le personnage devient capable d’ioniser l’air entre lui et un objet ou un être, et ainsi de déclencher une décharge électrostatique sur la cible choisie. Selon la nature de l’objet visé, il peut créer un court-circuit et un début d’incendie. Contre un être vivant, les effets sont identiques à ceux d’un étourdisseur. Au degré 6, le personnage est capable créer une telle différence de potentiel que la décharge libérée peut tuer sur le coup un être de taille Grande (Physique 4) ou moins et assommer un être de taille supérieure."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"PK6",
+            desc:"Le personnage peut soulever, déplacer ou manipuler (avec une Force ou une Habileté de +3) des objets d’une masse maximum de 10 tonnes."
+          },
+          {
+            name:"Vol",
+            desc:"Ce talent permet au personnage de se déplacer à une vitesse de base de 100 km/h, comme s'il était équipé d'un harnais antigrav. Il peut atteindre une altitude de base maximum de 1000 mètres."
+          },
+          {
+            name:"Thermokinésie",
+            desc:"Le personnage est maintenant capable d’agir sur la matière au degré microscopique. Il peut augmenter l’agitation moléculaire pour élever la température et enflammer à distance toute matière même non inflammable, dans n'importe quel type d'atmosphère et même dans le vide. Une flamme d'environ 1 m3 apparaît sur l'objet visé, dégageant de la chaleur. Elle disparaît instantanément à la cessation du talent, même si l'objet est combustible.\n A l’inverse, le personnage est capable de stopper l’agitation moléculaire de la matière et de refroidir un objet ou un être vivant. Plus la taille de la cible est petite, plus la température atteinte peut se rapprocher du zéro absolu."
+          }
+          ]
+        },
+      ]
+    },
+    {
+      name: "Télépathie",
+      ranks: [
+        { talents:[
+          {
+            name:"Ecran mental",
+            desc:"Ce talent permet au personnage de se protéger des intrusions mentales d'autres télépathes. C'est une action réflexe, passive, qui lui permet de créer un brouillard de pensées parasites et d'empêcher toute tentative d'Empathie, de Lecture ou de Sondage à son encontre, dans la mesure où il réussit son test en opposition. Si le talent qu’il essaye de contrer est d’un degré supérieur à son degré acquis, il subit une Complication sur son test de défense."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Empathie",
+            desc:"Le personnage peut ressentir les émotions des Êtres qui l'entourent (peur, mensonge, hostilité), sauf s'ils sont protégés par un Ecran Mental ou une Barrière PSI. Il aura ainsi l'intuition d'une menace indéfinissable s'il est guetté, ou devinera si son interlocuteur nourrit de mauvaises intentions à son égard."
+          },
+          {
+            name:"Scan PSI",
+            desc:"Le personnage peut scanner sommairement une zone circulaire de rayon égal à la portée du talent à la recherche d'un être pensant et conscient. Il ne détectera pas un être plongé dans l'inconscience ou aux schémas de comportement instinctifs comme un animal. Si le télépathe recherche un Être d'une espèce différente de la sienne, il subit une Complication à son test."
+          },
+          {
+            name:"Prolongation d'émotion",
+            desc:"Le personnage peut prolonger une émotion qu’il a ressenti chez un ou plusieurs êtres à portée. Ce talent n'est sujet à aucune limitation de langage ou de forme de vie. Le personnage transmet un concept d'esprit à esprit, et non des mots. Ses effets sont nuls contre une protection psychique (Ecran Mental ou Barrière PSI) ou si deux interlocuteurs s'en servent l'un contre l'autre."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Lecture mentale",
+            desc:"Ce talent permet au personnage de lire les pensées de l'un des Êtres qui l'entourent, sauf si ce dernier sait former un Ecran Mental ou est protégé par une Barrière PSI.\n Deux télépathes de ce degré peuvent communiquer par la pensée, dix fois plus rapidement que par la parole."
+          },
+          {
+            name:"Multi-cibles",
+            desc:"Le personnage peut utiliser ses talents sur plusieurs cibles, à condition que la somme des degrés de talents mis en jeu ne dépasse pas son degré de Télépathie acquis. Un télépathe de degré 6 peut ainsi effectuer un scan psychique sur un rayon de 25 mètres autour de lui tout en pratiquant un sondage mental sur un individu situé à moins de 50 mètres de lui (degrés 2 + 4 =6).\n Pour chaque être ciblé, le télépathe fait un test dont la Difficulté dépend du talent utilisé. En cas d'échec à un seul des tests, c'est l'effet 'château de cartes' et aucun des talents ne fonctionne, les esprits de toutes ses cibles se referment à la perception du télépathe."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Sondage mental",
+            desc:"Le personnage peut sonder les pensées plus profondes et fouiller la mémoire de sa cible, à la recherche d'un souvenir que même celle-ci peut avoir oublié.\n Il peut aussi émettre des pensées et communiquer avec l'un des êtres qui l'entourent, même si ce dernier n'est pas lui-même télépathe. Il peut poser des questions à l'aide de phrases simples de type 'sujet+verbe+complément'. S'il n'a pas d'Ecran Mental ou de Barrière PSI, l'interlocuteur sera obligé de répondre la vérité, ou de s'enfuir... ou encore de chercher à tuer le télépathe inquisiteur."
+          },
+          {
+            name:"Choc mental",
+            desc:"Le personnage peut brouiller la psyché de sa cible, voire provoquer un choc mental. S'il réussit son test, sa victime est Etourdie tant que le télépathe maintient sa concentration. Si ce dernier réalise une Prouesse, il peut choisir de rendre la victime Inconsciente pour une durée de 5 minutes par degré de Télépathie."
+          },
+          {
+            name:"Suppression d'émotion",
+            desc:"Le personnage peut supprimer une émotion qu’il a ressenti chez un ou plusieurs êtres à portée. Les modalités d’utilisation sont les mêmes que pour prolonger une émotion."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Contrôle mental",
+            desc:"Ce talent permet au personnage de donner un ordre à l'un des êtres qui l'entourent. Il sera obéi sauf si l'exécution de l'ordre met en danger la vie de l’être contrôlé. D'autre part, il n'est plus stoppé par un Ecran Mental (mais le talent de Barrière PSI peut l'empêcher d'agir). Il peut rendre sa cible Inconsciente (elle est simplement endormie) pour une heure (deux heures au degré 6)."
+          },
+          {
+            name:"Feinte mentale",
+            desc:"Le personnage peut faire croire à l’absence d’Ecran Mental à tout télépathe de degré inférieur au sien. L’écran est tout de même actif, mais certaines pensées superficielles sont accessibles, faisant office de leurres. S'il réussit son test de Feinte Mentale en opposition à la tentative d’Empathie, de Lecture ou de Sondage de son agresseur, le personnage trouve des ouvertures dans la protection psychique de ce dernier, et peut immédiatement riposter à l’agression par un test de Contrôle, d’Assaut ou d’Aliénation en bénéficiant d’un Atout."
+          }
+          ]
+        },
+        { talents:[
+          {
+            name:"Assaut mental",
+            desc:"Le personnage peut contrôler complètement les actions d'un Être non-télépathe, comme si celui-ci était une marionnette.\n Contre un autre télépathe, une tentative d'Assaut Mental donne lieu à une réponse réflexe. L'adversaire effectue aussi un test de Télépathie (même s'il n'est pas de degré 6) en opposition. Celui qui perd l’opposition tombe sous le contrôle de l'autre."
+          },
+          {
+            name:"Aliénation",
+            desc:"Le personnage peut effacer une partie de la mémoire de sa cible, ou y implanter temporairement des souvenirs factices. L’aliénation reste active pendant un nombre d’heures égal à la Performance du test. Si le télépathe réalise une Prouesse, il peut décider librement de la durée (en heures, jours, semaines...) voire rendre la manipulation psychique permanente."
+          },
+          {
+            name:"Induction d'émotion",
+            desc:"Le personnage peut susciter une émotion chez un ou plusieurs êtres à portée. Les modalités d’utilisation sont les mêmes que pour prolonger ou supprimer une émotion."
+          }
+          ]
+        },
+      ]
+    },
+  ];
+
+  const talentList = [
+    { name: "Adroit", desc: "", boon: 1, daily: 1 },
+    { name: "Agile", desc: "", boon: 1, daily: 1 },
+    { name: "Attentif", desc: "", boon: 1, daily: 1 },
+    { name: "Affable", desc: "", boon: 1, daily: 1 },
+    { name: "Attirant", desc: "", boon: 1, daily: 1 },
+    { name: "Calme", desc: "", boon: 1, daily: 1 },
+    { name: "Eloquent", desc: "", boon: 1, daily: 1 },
+    { name: "Imposant", desc: "", boon: 1, daily: 1 },
+    { name: "Intuitif", desc: "", boon: 1, daily: 1 },
+    { name: "Persévérant", desc: "", boon: 1, daily: 1 },
+    { name: "Puissant", desc: "", boon: 1, daily: 1 },
+    { name: "Résistant", desc: "", boon: 1, daily: 1 },
+    { name: "Acrobate", desc: "", required: "", boon: 0 },
+    { name: "Artilleur", desc: "", required: "", boon: 0 },
+    { name: "Astrogateur", desc: "", required: "", boon: 0 },
+    { name: "Aviateur", desc: "", required: "", boon: 0 },
+    { name: "Canonnier", desc: "", required: "", boon: 0 },
+    { name: "Chasseur", desc: "", required: "", boon: 0 },
+    { name: "Conducteur", desc: "", required: "", boon: 0 },
+    { name: "Contrebandier", desc: "", required: "", boon: 0 },
+    { name: "Craqueur", desc: "", required: "", boon: 0 },
+    { name: "Ecuyer", desc: "", required: "", boon: 0 },
+    { name: "Fleuriste", desc: "", required: "", boon: 0 },
+    { name: "Grimpeur", desc: "", required: "", boon: 0 },
+    { name: "Ingénieur Varlet", desc: "", required: "", boon: 0 },
+    { name: "Légiste", desc: "", required: "", boon: 0 },
+    { name: "Marin", desc: "", required: "", boon: 0 },
+    { name: "Méchanaute", desc: "", required: "", boon: 0 },
+    { name: "Négociant", desc: "", required: "", boon: 0 },
+    { name: "Parkour", desc: "", required: "", boon: 0 },
+    { name: "Passe-passe", desc: "", required: "", boon: 0 },
+    { name: "Pied spatial", desc: "", required: "", boon: 0 },
+    { name: "Pilote", desc: "", required: "", boon: 0 },
+    { name: "Pisteur", desc: "", required: "", boon: 0 },
+    { name: "Saboteur", desc: "", required: "", boon: 0 },
+    { name: "Secouriste", desc: "", required: "", boon: 0 },
+    { name: "Sensoriste", desc: "", required: "", boon: 0 },
+    { name: "Sprinteur", desc: "", required: "", boon: 0 },
+    { name: "Universitaire", desc: "", required: "", boon: 0 },
+    { name: "Urgentiste", desc: "", required: "", boon: 0 },
+    { name: "Vigilant", desc: "", required: "", boon: 0 },
+    { name: "Attaque précise", desc: "", boon: 0 },
+    { name: "Attaque puissante", desc: "", boon: 0 },
+    { name: "Attaque sournoise", desc: "", boon: 0 },
+    { name: "Berserker", desc: "", boon: 0 },
+    { name: "Défaut de l'armure", desc: "", boon: 0 },
+    { name: "Enchainement", desc: "", boon: 0 },
+    { name: "Esquive", desc: "", boon: 0 },
+    { name: "Lutte", desc: "", boon: 0 },
+    { name: "Parade", desc: "", boon: 0 },
+    { name: "Riposte", desc: "", boon: 0 },
+    { name: "Second souffle", desc: "", boon: 0 },
+    { name: "Affinité animale", desc: "", boon: 0 },
+    { name: "Chanceux", desc: "", boon: 0 },
+    { name: "Cyberphile", desc: "", boon: 0 },
+    { name: "Débrouillard", desc: "", boon: 0 },
+    { name: "Entrainement simstim", desc: "", boon: 0 },
+    { name: "Expertise", desc: "", boon: 0 },
+    { name: "Infatigable", desc: "", boon: 0 },
+    { name: "Jugeote", desc: "", boon: 0 },
+    { name: "PSI latent", desc: "", boon: 0 },
+    { name: "Récupération  rapide", desc: "", boon: 0 },
+    { name: "Robuste", desc: "", boon: 0 },
+    { name: "Sens aiguisé", desc: "", boon: 0 },
+    { name: "Vitalité débordante", desc: "", boon: 0 },
+    { name: "Xénophile", desc: "", boon: 0 },
+  ];
+
+  const settings = {
+    debugMode: false,
+    basePA: 3,
+  };
+
+  function int(value, onError = 0) {
+    return parseInt(value) || onError;
+  }
+
+  function float(value, onError = 0) {
+    return parseFloat(value) || onError;
+  }
+
+  function stringOrEmpty(value, onError = "") {
+    return value || onError;
+  }
+
+  function clog(
+    data,
+    title = "",
+    color = { text:"green", back:"" },
+    style = "font-size:12px; font-weight:normal;",
+    headerStyle = "font-size:13px; font-weight:bold;") {
+
+    title = stringOrEmpty(title, "");
+    if (title !== "") title = ` Sheet-Worker : ${title} `;
+    const titleStyle = `color:${color.text}; background-color:${color.back}; ${headerStyle} text-decoration:underline;`;
+    const textStyle = `color:${color.text}; background-color:${color.back}; ${style}`;
+
+    if (title) {
+      if (typeof data === "object") {
+        const output = `%c${title}`;
+        console.log(output, titleStyle, data);
+      } else {
+        const output = `%c${title} %c${data}`;
+        console.log(output, titleStyle, textStyle);
+      }
+    } else {
+      if (typeof data === "object") {
+        console.log(data);
+      } else {
+        const output = `%c${data}`;
+        console.log(output, textStyle);
+      }
+    }
+  }
+
+  function logEvent(ei) {
+    if (settings.debugMode) clog(ei, "Got event", { text:"white", back:"darkred" });
+    // console.log("Sheet-Worker >>>","Got event >>>",ei,next);
+  }
+
+  function logAndSet(o, from) {
+    from = stringOrEmpty(from);
+    if (from !== "") from = ` from ${from}`;
+    if (settings.debugMode) clog(o, `Set attributes${from}`, { text:"white", back:"green" });
+    // console.log("Sheet-Worker >>>",`Set attributes ${from}>>>`,o);
+    setAttrs(o);
+  }
+
+  buttonList.forEach(button => {
+        on(`clicked:${button}`, function() {
+            setAttrs({
+                sheet_tab: button
+            });
+        });
+    });
+
+  function setEndurance() {
+    getAttrs(["phy", "for", "vol", "end_mod"], function(v) {
+      const phy = int(v.phy);
+      const forv = int(v.for);
+      const vol = int(v.vol);
+      const end_mod = int(v.end_mod);
+      const end = phy*3 + forv + vol + end_mod;
+      const vitality = end*3;
+      logAndSet(
+        { end, vitality, vit_valid: end, vit_injured: end, cond_injured: 0, vit_critical: end, cond_critical: 0 },
+        "setEndurance"
+        );
+    });
+  }
+
+  function setHealthState(attr) {
+    const state = attr.split("_")[1];
+    attr = attr.split("_")[0];
+    getAttrs([`vit_${state}`,`cond_${state}`, "end"], function(v) {
+      const vit_state = int(v[`vit_${state}`]);
+      const cond_state = int(v[`cond_${state}`]);
+      const end = int(v.end);
+      let health = {};
+      if (attr === "vit") health[`cond_${state}`] = (vit_state < end) ? 1 : 0;
+      if (attr === "cond" && cond_state === 0) health[`vit_${state}`] = end;
+      logAndSet(health, "setHealthState");
+    });
+  }
+
+  function setWounds(attr) {
+    getAttrs([attr, "vit_valid", "vit_injured", "cond_injured", "vit_critical", "cond_critical"], function(v) {
+      const dmattr = Object.keys(v)[0];
+      let damage = int(v[dmattr]);
+      if (damage === 0) return;
+      let vitality = int(v.vitality);
+      let vit_valid = int(v.vit_valid);
+      let vit_injured = int(v.vit_injured);
+      let cond_injured = int(v.cond_injured);
+      let vit_critical = int(v.vit_critical);
+      let cond_critical = int(v.cond_critical);
+      while (damage > 0) {
+        if (vit_valid > 0) {
+          vit_valid--;
+        } else if (vit_injured > 0) {
+          cond_injured = 1
+          vit_injured--;
+        } else if (vit_critical > 0) {
+          cond_critical = 1
+          vit_critical--;
+        }
+        damage--
+      }
+      const attrs = { vit_valid, vit_injured, cond_injured, vit_critical, cond_critical };
+      attrs[dmattr] = damage;
+      logAndSet(attrs, "setWounds");
+    });
+  }
+
+  function setVitality() {
+    getAttrs(["vit_valid", "vit_injured", "vit_critical"], function(v) {
+      let vitality = 0;
+      vitality += int(v.vit_valid);
+      vitality += int(v.vit_injured);
+      vitality += int(v.vit_critical);
+      logAndSet({ vitality }, "setVitality");
+    });
+  }
+
+  function calcMobility(v) {
+    // base attrs
+    const phy = int(v.phy);
+    const hab = int(v.hab);
+    const mob_mod = int(v.mob_mod);
+    // conditions
+    const restrained = int(v.cond_restrained);
+    const stunned = int(v.cond_stunned);
+    const incapacitated = int(v.cond_incapacitated);
+    const exhausted = int(v.cond_exhausted);
+    let mob = phy + hab + mob_mod;
+    if (restrained === 1 || incapacitated === 1) {
+      return 0;
+    } else if (stunned === 1 || exhausted === 1) {
+      return Math.floor(mob/2);
+    } else {
+      return mob;
+    }
+  };
+
+  function setMobility() {
+    getAttrs(mobilityList, function(v) {
+      const mob = calcMobility(v);
+      logAndSet({ mob }, "setMobility");
+    });
+  };
+
+  function createSkillList() {
+    getSectionIDs("repeating_skills", function(rowIds) {
+      rowIds.forEach((rowId) => {
+        removeRepeatingRow(`repeating_skills_${rowId}`);
+      });
+      let attrs = {};
+      skillList.forEach((skill) => {
+        const rowId = generateRowID();
+        attrs[`repeating_skills_${rowId}_skillname`] = skill.name;
+        attrs[`repeating_skills_${rowId}_skillattr`] = stringOrEmpty(skill.attr);
+      });
+      logAndSet(attrs, "createSkillList");
+    });
+  }
+
+  function calcPA(v) {
+    const pa_mod = int(v.pa_mod);
+    // conditions
+    const restrained = int(v.cond_restrained);
+    const incapacitated = int(v.cond_incapacitated);
+    const surprised = int(v.cond_surprised);
+    let pa_val = settings.basePA + pa_mod;
+    if (incapacitated === 1) {
+      return 0;
+    } else if (restrained === 1) {
+      return pa_val - 2;
+    } else if (surprised === 1) {
+      return 1;
+    } else {
+      return pa_val;
+    }
+  };
+
+  function setPA() {
+    getAttrs(["pa_mod"], function(v) {
+      const pa_val = calcPA(v);
+      logAndSet({ pa_val }, "setPA");
+    });
+  };
+
+  function onSheetOpened() {
+    getAttrs(["debug_mode", "debug_show", "char_sheet"], function(v) {
+      // debug mode
+      const debug_mode = int(v.debug_mode);
+      settings.debugMode = debug_mode === 1;
+      clog(
+        "Running sheetworker script... " + (settings.debugMode ? "DEBUG" : "PROD"), 
+        "",
+        { text:"white", back:"brown" }
+      );
+      // build skills and default vals
+      let char_sheet = stringOrEmpty( v.char_sheet);
+      if (char_sheet.indexOf("+skills") === -1) {
+        createSkillList();
+        char_sheet += "+skills";
+      }
+      if (char_sheet.indexOf("+pa") === -1) {
+        setPA();
+        char_sheet += "+pa";
+      }
+      logAndSet({ char_sheet }, "onSheetOpened");
+      // set roll type
+      setDiceRoll({ sourceAttribute: "" });
+    });
+  };
+
+  function setGradeName() {
+    getAttrs(["grade", "career"], function(v) {
+      const grade = int(v.grade);
+      const career = stringOrEmpty(v.career);
+      if (grade === 0) return;
+      const grades = careerList[career] || [];
+      if (grades.length === 0) return;
+      const grade_name = grades[grade -1];
+      logAndSet({ grade_name }, "setGradeName");
+    });
+  }
+
+  function setAbilityName() {
+    getAttrs(["ability"], function(v) {
+      const ability = abilities.filter((item) => {
+        return (item.attr === v.ability);
+      });
+      const ability_name = ability[0].name;
+      logAndSet(
+        { ability_name, ability_short: ability_name.substring(0,3).toUpperCase() },
+        "setAbilityName"
+        );
+    });
+  };
+
+  function isPhysical(abilityId) {
+    return (physicalAbilities.findIndex(pa => pa.attr === abilityId) !== -1);
+  }
+
+  function isMental(abilityId) {
+    return (mentalAbilities.findIndex(ma => ma.attr === abilityId) !== -1);
+  }
+
+  function changeDiceRoll(params) {
+    let roll_conditions = "";
+    let roll = params.rollType;
+    if (roll === BANE_ROLL) {
+      roll_conditions = "Situation (C)";
+      if (params.isAsset === 1 && params.talentUsed === 1) {
+        roll = DICE_ROLL;
+        roll_conditions += " + Talent (A)"
+      }
+    } else if (roll === DICE_ROLL) {
+      roll_conditions = "Situation (N)";
+      if (params.isAsset === 1 && params.talentUsed === 1) {
+        roll = BOON_ROLL;
+        roll_conditions += " + Talent (A)"
+      }
+    } else if (roll === BOON_ROLL) {
+      roll_conditions = "Situation (A)";
+      if (params.isAsset === 1 && params.talentUsed === 1) {
+        roll_conditions += " + Talent (A)";
+      }
+    }
+    if (params.injured === 1 || params.wornout === 1) {
+      if (parmas.injured === 1) roll_conditions += " + Blessé (C)";
+      if (parmas.wornout === 1) roll_conditions += " + Abattu (C)";
+      if (roll === DICE_ROLL) {
+        roll = BANE_ROLL;
+      } else if (roll === BOON_ROLL) {
+        roll = DICE_ROLL;
+      }
+    }
+    if (params.weakened === 1 && isPhysical(params.ability)) {
+      roll_conditions += " + Affaibli (C:physique)";
+      if (roll === DICE_ROLL) {
+        roll = BANE_ROLL;
+      } else if (roll === BOON_ROLL) {
+        roll = DICE_ROLL;
+      }
+    }
+    if (params.exhausted === 1) {
+      if (isMental(params.ability)) {
+        roll_conditions += " + Epuisé (C:mental)";
+        if (roll === DICE_ROLL) {
+          roll = BANE_ROLL;
+        } else if (roll === BOON_ROLL) {
+          roll = DICE_ROLL;
+        }
+      }
+      if (isPhysical(params.ability)) {
+        roll_conditions += " + Epuisé (physique)";
+        roll = CANT_ROLL;
+      }
+    }
+
+    roll_conditions += " => "
+    switch (roll) {
+      case BANE_ROLL:
+        roll_conditions += "Jet avec Complication";
+        break;
+      case DICE_ROLL:
+        roll_conditions += "Jet Normal";
+        break;
+      case BOON_ROLL:
+        roll_conditions += "Jet avec Atout";
+        break;
+      case CANT_ROLL:
+        roll_conditions += "Incapable d'agir";
+        break;
+    }
+    logAndSet({ dice_roll: roll, roll_conditions }, "changeDiceRoll");
+  };
+
+  function setDiceRoll(eventInfo) {
+    readAttrs = ["rolltype", "ability", "cond_weakened", "cond_wornout", "cond_exhausted", "cond_injured"];
+    let source = stringOrEmpty(eventInfo.sourceAttribute);
+    if (source.startsWith("repeating_talents")) {
+      readAttrs.push(source);
+      readAttrs.push(source.replace("talentuse","asset"));
+    }
+    getAttrs(readAttrs, function(values) {
+      const rollType = values.rolltype || DICE_ROLL;
+      const ability = stringOrEmpty(values.ability);
+      const weakened = int(values.cond_weakened);
+      const wornout = int(values.cond_wornout);
+      const exhausted = int(values.cond_exhausted);
+      const injured = int(values.cond_injured);
+      if (Object.keys(values).length > 2) {
+        const talentUsed = int(values[Object.keys(values)[2]]);
+        const isAsset = int(values[Object.keys(values)[3]]);
+        changeDiceRoll({ 
+          talentUsed, 
+          isAsset, 
+          rollType, 
+          ability, 
+          weakened, 
+          wornout, 
+          exhausted, 
+          injured 
+        });
+        return;
+      }
+      getSectionIDs("repeating_talents", function(rowIds) {
+        if (rowIds.length === 0) changeDiceRoll(0, 0, rolltype, cond_injured);
+        rowIds.forEach((rowId) => {
+          getAttrs([`repeating_talents_${rowId}_talentuse`,`repeating_talents_${rowId}_asset`], function(values) {
+            const talentUsed = int(values[Object.keys(values)[0]]);
+            const isAsset = int(values[Object.keys(values)[1]]);
+            changeDiceRoll({ 
+              talentuse, 
+              asset, 
+              rolltype, 
+              ability, 
+              weakened, 
+              wornout, 
+              exhausted, 
+              injured 
+            });
+          });
+        });
+      });
+    });
+  };
+
+  function apply_injured_Condition(condVal) {
+  };
+
+  function apply_restrained_Condition(condVal) {
+    getAttrs(["pa_mod", ...mobilityList], function(v) {
+      v["cond_restrained"] = condVal;
+      const mob = calcMobility(v);
+      const pa_val = calcPA(v);
+      logAndSet({ mob, pa_val }, "apply_restrained_Condition");
+    });
+  };
+
+  function apply_stunned_Condition(condVal) {
+    getAttrs(mobilityList, function(v) {
+      v["cond_stunned"] = condVal;
+      const mob = calcMobility(v);
+      logAndSet({ mob }, "apply_stunned_Condition");
+    });
+  };
+
+  function apply_incapacitated_Condition(condVal) {
+    getAttrs(["pa_mod", ...mobilityList], function(v) {
+      v["cond_incapacitated"] = condVal;
+      const mob = calcMobility(v);
+      const pa_val = calcPA(v);
+      logAndSet({ mob, pa_val }, "apply_incapacitated_Condition");
+    });
+  };
+
+  function apply_weakened_Condition(condVal) {
+  };
+
+  function apply_wornout_Condition(condVal) {
+  };
+
+  function apply_exhausted_Condition(condVal) {
+    getAttrs(mobilityList, function(v) {
+      v["cond_exhausted"] = condVal;
+      const mob = calcMobility(v);
+      logAndSet({ mob }, "apply_exhausted_Condition");
+    });
+  };
+
+  function apply_unconscious_Condition(condVal) {
+  };
+
+  function apply_dying_Condition(condVal) {
+  };
+
+  function apply_prone_Condition(condVal) {
+  };
+
+  function apply_surprised_Condition(condVal) {
+    getAttrs(["pa_mod"], function(v) {
+      v["cond_surprised"] = condVal;
+      const pa_val = calcPA(v);
+      logAndSet({ pa_val }, "apply_surprised_Condition");
+    });
+  };
+
+  function applyCondition(eventInfo) {
+    const conditionAttr = eventInfo.sourceAttribute;
+    const conditionFunc = `apply_${conditionAttr.split("_")[1]}_Condition`;
+    eval(conditionFunc)(int(eventInfo.newValue));
+  };
+
+  function skillModUpdated(eventInfo) {
+    const rowId = eventInfo.sourceAttribute.split("_")[2];
+    getAttrs([`repeating_skills_${rowId}_skillattr`], function(v) {
+      const skillAttr = stringOrEmpty(v[Object.keys(v)[0]]);
+      if (skillAttr === "") return;
+      const attr = {};
+      attr[skillAttr] = int(eventInfo.newValue);
+      logAndSet(attr, "skillModUpdated");
+    });
+  };
+
+  function addTalent() {
+    getAttrs(['talent_choice'], function(v) {
+      let talentName = stringOrEmpty(v.talent_choice);
+      if (talentName === "") return;
+      if (talentName.startsWith("[") && talentName.endsWith("]")) return;
+      const talent = talentList.filter((item) => {
+        return (item.name.toLowerCase() === talentName.toLowerCase())
+      });
+      if (talent.length === 0) return;
+      let attrs = { talent_choice: "" };
+      const rowId = generateRowID();
+      attrs[`repeating_talents_${rowId}_talentname`] = talent[0].name;
+      attrs[`repeating_talents_${rowId}_talentdesc`] = talent[0].name; // talent[0].desc
+      attrs[`repeating_talents_${rowId}_asset`] = talent[0].boon;
+      const daily = (talent[0].daily == 1) || false;
+      if (daily) attrs[`repeating_talents_${rowId}_assetdaily`] = 1;
+      logAndSet(attrs, "addTalent");
+    });
+  };
+
+  function parseText(text, sign = 1) {
+    const rows = text.split("\n");
+    const attrs = {};
+    rows.forEach(row => {
+      if (row.indexOf(":[") === -1 || !row.endsWith("]")) return;
+      let modAttr = stringOrEmpty(row.split(":")[0]);
+      if (modAttr === "") return;
+      modAttr = modAttr.slice(0,3).toLowerCase() + "_mod";
+      let modVal = row.split(":")[1];
+      modVal = int(modVal.slice(1,modVal.length-1));
+      attrs[modAttr] = modVal * sign;
+    });
+    return attrs;
+  };
+
+  function parseTalent(eventInfo) {
+    const attrs = {};
+    let result;
+    result = parseText(eventInfo.previousValue, 0);
+    Object.keys(result).forEach(attr => {
+      attrs[attr] = result[attr];
+    });
+    result = parseText(eventInfo.newValue);
+    Object.keys(result).forEach(attr => {
+      attrs[attr] = result[attr];
+    });
+    logAndSet(attrs, "parseTalent");
+  };
+
+  function psiRankDesc(psi, r) {
+    let descRank = "";
+    const rank = psi.ranks[r];
+    for (const talent of rank.talents) {
+      descRank += `\n${r+1} - ${talent.name} :`;
+      descRank += `\n${talent.desc.replaceAll(",","&#44;")}`;
+    }
+    return descRank;
+  }
+
+  function setPSIDesc(psiName, rankNr) {
+    let desc = [];
+    const psi = psiList.filter((item) => {
+        return (item.name.toLowerCase() === psiName.toLowerCase())
+    });
+    if (psi.length === 1) {
+      for (let r = 0; r < rankNr; r++) {
+        desc.push(psiRankDesc(psi[0], r).slice(1));
+      }
+    }
+    return desc;
+  }
+
+  function addPSI() {
+    getAttrs(['psi_choice'], function(v) {
+      let psiName = stringOrEmpty(v.psi_choice);
+      if (psiName === "") return;
+      const psi = psiList.filter((item) => {
+        return (item.name.toLowerCase() === psiName.toLowerCase())
+      });
+      if (psi.length === 0) return;
+      let attrs = { psi_choice: "" };
+      const rowId = generateRowID();
+      attrs[`repeating_psis_${rowId}_psiname`] = psi[0].name;
+      attrs[`repeating_psis_${rowId}_psimod`] = 1;
+      const descs = setPSIDesc(psi[0].name,1)
+      attrs[`repeating_psis_${rowId}_psidesc`] = descs[0];
+      attrs[`repeating_psis_${rowId}_psidesc1`] = descs[0];
+      logAndSet(attrs, "addPSI");
+    });
+  }
+
+  function changePSIDesc(eventInfo) {
+    const rowId = eventInfo.sourceAttribute.split("_")[2];
+    getAttrs([`repeating_psis_${rowId}_psiname`, eventInfo.sourceAttribute], function(v) {
+      const psiName = stringOrEmpty(v[Object.keys(v)[0]]);
+      const psiMod = int(v[Object.keys(v)[1]]);
+      let attr = {};
+      const descs = setPSIDesc(psiName, psiMod);
+      descs.forEach((d,r) => {
+        attr[`repeating_psis_${rowId}_psidesc${r+1}`] = descs[r];
+      });
+      attr[`repeating_psis_${rowId}_psidesc`] = descs.join('\n').replaceAll("&#44;",",");
+      logAndSet(attr, "changePSIDesc");
+    });
+  }
+
+  function changePSIMax(eventInfo) {
+    getAttrs(['skill_meditation', 'psi_mod'], function (v) {
+      const psi_base = int(v.skill_meditation);
+      const psi_mod = int(v.psi_mod);
+      let psi_max = psi_base + psi_mod;
+      getSectionIDs("repeating_psis", function(rowIds) {
+        rowIds.forEach(rowId => {
+          getAttrs([`repeating_psis_${rowId}_psimod`], function(v) {
+            const psimod = int(v[Object.keys(v)[0]]);
+            psi_max += psimod;
+            console.log(psimod, psi_max);
+            logAndSet({ psi_max }, "changePSIMax");
+          });
+        });
+      });
+    });
+  }
+
+  function showConditions() {
+    const attrs = conditions.map(c => 'cond_' + c.id);
+    attrs.push("show_conditions");
+    getAttrs(attrs, function (v) {
+      let char_conditions = "";
+      show_conditions = int(v.show_conditions);
+      if (show_conditions === 1) {
+        delete v.show_conditions;
+        Object.keys(v).forEach(cond => {
+          const condVal = int(v[cond]);
+          if (condVal === 0) return;
+          const condition = conditions.find(c => c.id === cond.split("_")[1]);
+          char_conditions += `\n${condition.name} : ${condition.desc}`;
+        });
+        char_conditions = char_conditions.substring(1);
+      }
+      logAndSet({ char_conditions }, "showConditions");
+    });
+  };
+
+  on("sheet:opened", function() {
+    onSheetOpened();
+  });
+
+  on("change:grade", function(eventInfo) {
+    logEvent(eventInfo);
+    setGradeName();
+  });
+
+  on("change:ability", function(eventInfo) {
+    logEvent(eventInfo);
+    setAbilityName();
+  });
+
+  on(["change:phy", "change:for", "change:vol", "change:end_mod"].join(" "), function(eventInfo) {
+    logEvent(eventInfo);
+    setEndurance();
+  });
+
+  on(["change:vit_injured", "change:cond_injured", "change:vit_critical", "change:cond_critical"].join(" "), function(eventInfo) {
+    logEvent(eventInfo);
+    setHealthState(eventInfo.sourceAttribute);
+  });
+
+  on("clicked:damage", function(eventInfo) {
+    logEvent(eventInfo);
+    setWounds("damage");
+  });
+
+  on("change:got_dmg", function(eventInfo) {
+    logEvent(eventInfo);
+    setWounds("got_dmg");
+  });
+
+  on(["change:vit_valid", "change:vit_injured", "change:vit_critical"].join(" "), function(eventInfo) {
+    logEvent(eventInfo);
+    setVitality();
+  });
+
+  on(["change:phy", "change:hab", "change:mob_mod"].join(" "), function(eventInfo) {
+    logEvent(eventInfo);
+    setMobility();
+  });
+
+  conditions.forEach((condition) => {
+    on(`change:cond_${condition.id}`, function(eventInfo) {
+      logEvent(eventInfo);
+      applyCondition(eventInfo);
+    });
+  });
+
+
+  on("change:repeating_skills:skillmod", function(eventInfo) {
+    logEvent(eventInfo);
+    skillModUpdated(eventInfo);
+  });
+
+  on(
+    [
+    "change:rolltype",
+    "change:ability",
+    "change:repeating_talents:talentuse", 
+    "change:cond_injured",
+    "change:cond_weakened",
+    "change:cond_wornout",
+    "change:cond_exhausted"
+    ].join(" "), function(eventInfo) {
+    logEvent(eventInfo,"setDiceRoll");
+    setDiceRoll(eventInfo);
+  });
+
+  on("clicked:addtalent", function(eventInfo) {
+    logEvent(eventInfo);
+    addTalent();
+  });
+
+  on("change:repeating_talents:talentdesc", function(eventInfo) {
+    logEvent(eventInfo);
+    parseTalent(eventInfo);
+  });
+
+  on("clicked:addpsi", function(eventInfo) {
+    logEvent(eventInfo);
+    addPSI();
+  });
+
+  on("change:repeating_psis:psimod", function(eventInfo) {
+    logEvent(eventInfo);
+    changePSIDesc(eventInfo);
+  });
+
+  on("change:skill_meditation change:repeating_psis:psimod change:psi_mod", function (eventInfo) {
+    logEvent(eventInfo);
+    changePSIMax(eventInfo);
+  });
+
+  on("change:show_conditions", function(eventInfo) {
+    logEvent(eventInfo);
+    showConditions();
+  });
+</script>
