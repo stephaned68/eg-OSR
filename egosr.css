@@ -4,6 +4,8 @@
 :root {
   --egosr-mainfont : 'Exo 2', sans-serif;
   --egosr-altfont: 'Audiowide', cursive;
+  --egosr-prowess: #3fb315;
+  --egosr-fumble: #b31515;
 }
 
 .charsheet {
@@ -179,7 +181,7 @@ textarea.sheet-bio {
 .sheet-carac {
   font-size: 1.5rem;
   font-weight: bold;
-  width: 2.5em !important;
+  width: 3em !important;
   text-align: right;
   border-radius: 5px;
 }
@@ -234,6 +236,10 @@ button.sheet-flat-btn {
   background-image: none;
 }
 
+button.sheet-small-btn {
+  font-size: small !important; 
+}
+
 button.sheet-picto-btn {
   font-family: "pictos";
 }
@@ -242,23 +248,28 @@ button[type="action"].sheet-picto-btn::before {
   content: "";
 }
 
-button[type="roll"].sheet-picto-btn::before {
+button[type="roll"].sheet-picto-btn::before,
+button[type="roll"].sheet-text-btn::before {
   content: "" !important;
 }
 
-.sheet-talent-group {
+.sheet-trait-group {
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 2px;
   width: 100%;
 }
 
-.sheet-talent {
-  width: calc(100%-5px);
+.sheet-trait {
+  width: calc(100% - 5px);
 }
 
 textarea.sheet-notes {
   height: auto;
+}
+
+.sheet-w-auto {
+  width: auto;
 }
 
 span.sheet-w-25 {
@@ -278,9 +289,9 @@ span.sheet-w-33 {
   border: 1px solid #333;
   border-radius: 10px;
   background: white;
+  box-shadow: 5px 5px 5px #333;
   padding-bottom: 15px;
   font-family: 'Exo 2', sans-serif;
-  /* font-family: 'Audiowide',cursive; */
   font-size: 1.4rem;
 }
 
@@ -323,6 +334,22 @@ span.sheet-w-33 {
   margin-top: 5px;
 }
 
+.sheet-rolltemplate-eg.sheet-prop .inlinerollresult.fullcrit {
+  color: var(--egosr-prowess) !important;
+  border-color: var(--egosr-prowess) !important;
+}
+
+.sheet-rolltemplate-eg.sheet-prop .inlinerollresult.fullfail {
+  color: var(--egosr-fumble) !important;
+  border-color: var(--egosr-fumble) !important;
+}
+
+.sheet-rolltemplate-eg .sheet-effect {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
 .sheet-rolltemplate-eg .sheet-major {
   font-weight: bolder;
 }
@@ -335,15 +362,11 @@ span.sheet-w-33 {
 .sheet-rolltemplate-eg .sheet-success {
   background-color: lightgreen;
   color: darkslategray;
-  width: 100%;
-  text-align: center;
 }
 
 .sheet-rolltemplate-eg .sheet-failure {
   background-color: lightcoral;
   color: darkslategray;
-  width: 100%;
-  text-align: center;
 }
 
 .sheet-rolltemplate-eg .sheet-txt-small {

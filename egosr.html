@@ -1,13 +1,12 @@
 <!-- HIDDEN DATA -->
-<input type="hidden" name="attr_version" value="1.0.0" />
-<input type="hidden" name="attr_sheet_ver" value="1.0.0" />
+<input type="hidden" name="attr_version" value="0.2.0" />
+<input type="hidden" name="attr_sheet_ver" value="0.2.0" />
 <input type="hidden" name="attr_debug_mode" value="0" />
 <input type="hidden" name="attr_char_sheet" value="" />
 <input type="hidden" name="attr_dice_roll" value="2d6" />
 <input type="hidden" name="attr_roll_conditions" value="" />
 <input type="hidden" name="attr_char_conditions" value="" />
 <input type="hidden" name="attr_vitality" value="" />
-<input type="hidden" name="attr_got_dmg" value="0" />
 
 <!-- CHARACTER SHEET -->
 <div class="sheet-main">
@@ -155,8 +154,7 @@
           class="sheet-carac"
           name="attr_fortune"
           value="2"
-        />
-        /
+        />/
         <input
           type="number"
           class="sheet-carac"
@@ -170,19 +168,9 @@
         <!-- Attributs -->
         <h2>Attributs</h2>
         <br />
-        <!-- For -->
-        <label class="sheet-label">
-          <input type="radio" name="attr_ability" value="@{for}" />
-          Force<input
-            type="number"
-            class="sheet-carac sheet-float-right"
-            name="attr_for"
-            value="0"
-          />
-        </label>
         <!-- Hab -->
         <label class="sheet-label">
-          <input type="radio" name="attr_ability" value="@{hab}" />
+          <input type="radio" name="attr_ability" value="@{hab}" selected />
           Habileté
           <input
             type="number"
@@ -191,14 +179,13 @@
             value="0"
           />
         </label>
-        <!-- Viv -->
+        <!-- For -->
         <label class="sheet-label">
-          <input type="radio" name="attr_ability" value="@{viv}" />
-          Vivacité
-          <input
+          <input type="radio" name="attr_ability" value="@{for}" />
+          Force<input
             type="number"
             class="sheet-carac sheet-float-right"
-            name="attr_viv"
+            name="attr_for"
             value="0"
           />
         </label>
@@ -235,105 +222,19 @@
             value="0"
           />
         </label>
-        <br />
-        <!-- Vitalité -->
-        <h2>Vitalité</h2>
-        <label>
-          Physique&nbsp;
-          <select class="sheet-ability sheet-float-right" name="attr_phy">
-            <option value="0">Choisir</option>
-            <option value="1">Minime</option>
-            <option value="2">Petit</option>
-            <option value="3" selected>Moyen</option>
-            <option value="4">Grand</option>
-            <option value="5">Enorme</option>
-            <option value="6">Colossal</option>
-          </select>
+        <!-- Sag -->
+        <label class="sheet-label">
+          <input type="radio" name="attr_ability" value="@{sag}" />
+          Sagacité
+          <input
+            type="number"
+            class="sheet-carac sheet-float-right"
+            name="attr_sag"
+            value="0"
+          />
         </label>
         <br />
-        <label>
-          Endurance
-          <span class="sheet-float-right">
-            <input
-              type="number"
-              class="sheet-carac"
-              name="attr_end"
-              value="0"
-              readonly
-            />
-          </span>
-        </label>
-        <div class="sheet-my-15">
-          Valide
-          <span class="sheet-float-right">
-            <input
-              type="number"
-              class="sheet-small sheet-right"
-              name="attr_vit_valid"
-              value="0"
-            />/
-            <input
-              type="number"
-              class="sheet-carac"
-              name="attr_end"
-              value="0"
-              readonly
-            />
-          </span>
-        </div>
-        <div class="sheet-my-15">
-          Blessé
-          <span class="sheet-float-right">
-            <input type="checkbox" name="attr_cond_injured" value="1" />
-            <input
-              type="number"
-              class="sheet-small sheet-right"
-              name="attr_vit_injured"
-              value="0"
-            />/
-            <input
-              type="number"
-              class="sheet-carac"
-              name="attr_end"
-              value="0"
-              readonly
-            />
-          </span>
-        </div>
-        <div class="sheet-my-15">
-          Critique
-          <span class="sheet-float-right">
-            <input type="checkbox" name="attr_cond_critical" value="1" />
-            <input
-              type="number"
-              class="sheet-small sheet-right"
-              name="attr_vit_critical"
-              value="0"
-            />/
-            <input
-              type="number"
-              class="sheet-carac"
-              name="attr_end"
-              value="0"
-              readonly
-            />
-          </span>
-        </div>
-        <div>
-          <b>Dommages</b>
-          <span class="sheet-float-right">
-            <input
-              type="number"
-              class="sheet-right"
-              name="attr_damage"
-              value="0"
-            />
-            <button type="action" class="sheet-picto-btn" name="act_damage">
-              k
-            </button>
-          </span>
-        </div>
-        <br />
+        <!-- Actions -->
         <h2>Actions</h2>
         <label>
           Mobilité
@@ -360,6 +261,75 @@
           </span>
         </label>
         <br />
+        <!-- Santé -->
+        <h2>Santé</h2>
+        <label>
+          Physique&nbsp;
+          <select class="sheet-ability sheet-float-right" name="attr_phy">
+            <option value="0">Choisir</option>
+            <option value="1">Minime</option>
+            <option value="2">Petit</option>
+            <option value="3" selected>Moyen</option>
+            <option value="4">Grand</option>
+            <option value="5">Enorme</option>
+            <option value="6">Colossal</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Vigueur
+          <span class="sheet-float-right">
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_vig_max"
+              value="9"
+              readonly
+            />/
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_vig"
+              value="9"
+            />
+          </span>
+        </label>
+        <label>
+          Vitalité
+          <span class="sheet-float-right">
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_vit_max"
+              value="18"
+              readonly
+            />/
+            <input
+              type="number"
+              class="sheet-carac"
+              name="attr_vit"
+              value="18"
+            />
+          </span>
+        </label>
+        <div class="sheet-my-5">
+          <b>Blessé</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_injured" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Critique</b>
+          <span class="sheet-float-right">
+            <input type="checkbox" name="attr_cond_critical" value="1" />
+          </span>
+        </div>
+        <div class="sheet-my-5">
+          <b>Mourant</b>
+          <span class="sheet-float-right">
+            <input type="number" class="sheet-carac" name="attr_cond_dying" value="" />
+          </span>
+        </div>
         <!-- Conditions -->
         <h2>Conditions</h2>
         <div class="sheet-my-5">
@@ -410,12 +380,6 @@
           </span>
         </div>
         <div class="sheet-my-5">
-          <b>Mourant</b>
-          <span class="sheet-float-right">
-            <input type="checkbox" name="attr_cond_dying" value="1" />
-          </span>
-        </div>
-        <div class="sheet-my-5">
           <b>Renversé</b>
           <span class="sheet-float-right">
             <input type="checkbox" name="attr_cond_prone" value="1" />
@@ -437,7 +401,7 @@
             <button
               type="roll"
               name="rollskill"
-              value="&{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{skillmod} + (@{diffmod}) ]] - @{target_num} ]] {{name=@{character_name} }} {{subtype=Test de compétence}} {{ability=@{ability_short} : @{ability}}} {{skill=@{skillname} : @{skillmod}}} {{difficulty=@{diffmod}}} {{throw=$[[0]]}} {{check=$[[1]]}} {{quality=$[[2]]}}"
+              value="@{togm} &{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{skillmod} + (@{diffmod}) ]] - @{target_num} ]] {{name=@{character_name} }} {{subtype=Test de compétence}} {{ability=@{ability_short} : @{ability}}} {{skill=@{skillname} : @{skillmod}}} {{difficulty=@{diffmod}}} {{throw=$[[0]]}} {{check=$[[1]]}} {{effect=$[[2]]}}"
             ></button>
             <input type="hidden" name="attr_skillname" value="" />
             <span name="attr_skillname"></span>
@@ -445,8 +409,9 @@
               type="number"
               class="sheet-skill sheet-float-right"
               name="attr_skillmod"
-              value="0"
+              value=""
             />
+            <input type="hidden" name="attr_unskilled" value="" />
             <input type="hidden" name="attr_skillattr" value="" />
           </div>
         </fieldset>
@@ -465,7 +430,7 @@
             name="attr_psi_choice"
             list="psiList"
             value=""
-            placeholder="Nom du PSI"
+            placeholder="Nom du talent PSI"
           />
           <datalist id="psiList">
             <option>Arts Martiaux</option>
@@ -483,13 +448,13 @@
           </button>
         </div>
         <fieldset class="repeating_psis">
-          <div class="sheet-talent-group">
+          <div class="sheet-trait-group">
             <details>
               <summary>
                 <button
                   type="roll"
                   name="rollpsi"
-                  value="&{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{psimod} + (@{diffmod}) ]] - @{target_num} ]] {{name=@{character_name} }} {{subtype=Test de talent PSI}} {{ability=@{ability_name} : @{ability}}} {{skill=@{psiname} : @{psimod}}} {{difficulty=@{diffmod}}} {{throw=$[[0]]}} {{check=$[[1]]}} {{quality=$[[2]]}}"
+                  value="@{togm} &{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{psimod} + (@{diffmod}) ]] - @{target_num} ]] {{name=@{character_name} }} {{subtype=Test de talent PSI}} {{ability=@{ability_name} : @{ability}}} {{skill=@{psiname} : @{psimod}}} {{difficulty=@{diffmod}}} {{throw=$[[0]]}} {{check=$[[1]]}} {{effect=$[[2]]}}"
                 ></button>
                 <span name="attr_psiname"></span>
                 <input
@@ -502,7 +467,7 @@
                   type="roll"
                   class="sheet-picto-btn sheet-flat-btn sheet-float-right"
                   name="roll_psidesc"
-                  value="&{template:eg} {{name=@{character_name} }} {{subtype=@{psiname} }} {{description=?{Rang|1,@{psidesc1}|2,@{psidesc2}|3,@{psidesc3}|4,@{psidesc4}|5,@{psidesc5}|6,@{psidesc6}|Tous,@{psidesc}} }}"
+                  value="@{togm} &{template:eg} {{name=@{character_name} }} {{subtype=@{psiname} }} {{description=?{Rang|1,@{psidesc1}|2,@{psidesc2}|3,@{psidesc3}|4,@{psidesc4}|5,@{psidesc5}|6,@{psidesc6}|Tous,@{psidesc}} }}"
                 >
                   w
                 </button>
@@ -526,32 +491,18 @@
             </details>
           </div>
         </fieldset>
-        <!-- TALENTS -->
+        <!-- TRAITS -->
         <br />
-        <h2>Talents</h2>
+        <h2>Traits</h2>
         <div>
           <input
             type="text"
-            name="attr_talent_choice"
-            list="talentList"
+            name="attr_trait_choice"
+            list="traitList"
             value=""
-            placeholder="Nom de l'atout"
+            placeholder="Nom du trait"
           />
-          <datalist id="talentList">
-            <optgroup value="Traits">
-              <option value="[Traits]">Traits</option>
-              <option>Agile</option>
-              <option>Attentif</option>
-              <option>Affable</option>
-              <option>Attirant</option>
-              <option>Calme</option>
-              <option>Eloquent</option>
-              <option>Imposant</option>
-              <option>Intuitif</option>
-              <option>Persévérant</option>
-              <option>Puissant</option>
-              <option>Résistant</option>
-            </optgroup>
+          <datalist id="traitList">
             <optgroup value="Spécialités">
               <option value="[Spécialités]">Spécialités</option>
               <option>Acrobate</option>
@@ -618,25 +569,25 @@
               <option>Xénophile</option>
             </optgroup>
           </datalist>
-          <button type="action" class="sheet-picto-btn" name="act_addtalent">
+          <button type="action" class="sheet-picto-btn" name="act_addtrait">
             +
           </button>
         </div>
-        <fieldset class="repeating_talents">
-          <div class="sheet-talent-group">
+        <fieldset class="repeating_traits">
+          <div class="sheet-trait-group">
             <details>
-              <summary><span name="attr_talentname"></span></summary>
-              <input type="checkbox" name="attr_talentuse" value="1" />&nbsp;
+              <summary><span name="attr_traitname"></span></summary>
+              <input type="checkbox" name="attr_traituse" value="1" />&nbsp;
               <input
                 type="text"
-                class="sheet-talent"
-                name="attr_talentname"
+                class="sheet-trait"
+                name="attr_traitname"
                 value=""
-                placeholder="Nom du talent"
+                placeholder="Nom du trait"
               />
               <textarea
-                name="attr_talentdesc"
-                placeholder="Description du talent..."
+                name="attr_traitdesc"
+                placeholder="Description du trait..."
               ></textarea>
               Atout ?&nbsp;<input type="checkbox" name="attr_asset" value="1" />
               &nbsp;Util. jour :
@@ -648,6 +599,74 @@
               />
             </details>
           </div>
+        </fieldset>
+        <!-- COMBAT -->
+        <br />
+        <h2>Combat</h2>
+        <fieldset class="repeating_combat">
+          <table>
+            <tr>
+              <td class="sheet-py-5 sheet-my-5">
+                <button
+                type="roll"
+                name="rollattk"
+                value="@{togm} &{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{attkmod} + (@{diffmod}) + (@{attkdiff}) ]] - @{target_num} ]] [[(@{attkdm}+@{attkdm2})@{attkd6}]] [[(@{attkdm}+@{attkdm2})@{attkd6}]] {{name=@{character_name} }} {{subtype=@{attkname}}} {{ability=@{ability_name} : @{ability}}} {{combat=@{attkskill}}} {{skill=@{attkmod}}} {{difficulty=[[ [[@{diffmod}]][Difficulté] + [[@{attkdiff}]][MD attaque] ]] }} {{throw=$[[0]]}} {{check=$[[1]]}} {{effect=$[[2]]}} {{damage=$[[3]]}} {{major=$[[4]]}}"
+                ></button>
+              </td>
+              <td class="sheet-py-5 sheet-my-5">
+                <input 
+                  type="text" 
+                  class="sheet-trait" 
+                  name="attr_attkname" 
+                  placeholder="Nom de l'attaque / arme" 
+                />
+                <input
+                  type="text"
+                  class="sheet-carac"
+                  name="attr_attkdm"
+                  title="Dommages"
+                  value=""
+                />&nbsp;
+                <input 
+                type="checkbox"
+                name="attr_attkranged"
+                title="A Distance"
+                value="1"
+                />&nbsp;
+                <input 
+                  type="checkbox"
+                  name="attr_attkua"
+                  title="A Mains nues"
+                  value="1"
+                />&nbsp;
+                <input 
+                  type="checkbox"
+                  name="attr_attkprc"
+                  title="Attaque précise"
+                  value="1"
+                />&nbsp;
+                <button
+                type="roll"
+                name="rollattk"
+                class="sheet-flat-btn sheet-text-btn sheet-small-btn"
+                title="2ème attaque"
+                value="@{togm} &{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{attkmod} + (@{diffmod}) + (@{attkdiff}) -2 ]] - @{target_num} ]] [[(@{attkdm}+@{attkdm2})@{attkd6}]] [[(@{attkdm}+@{attkdm2})@{attkd6}]] {{name=@{character_name} }} {{subtype=@{attkname} (2e att)}} {{ability=@{ability_name} : @{ability}}} {{combat=@{attkskill}}} {{skill=@{attkmod}}} {{difficulty=[[ [[@{diffmod}]][Difficulté] + [[@{attkdiff}]][MD attaque] -2[2eme attaque] ]] }} {{throw=$[[0]]}} {{check=$[[1]]}} {{effect=$[[2]]}} {{damage=$[[3]]}} {{major=$[[4]]}}"
+                >2e</button>
+                <button
+                type="roll"
+                name="rollattk"
+                class="sheet-flat-btn sheet-text-btn sheet-small-btn"
+                title="3ème attaque"
+                value="@{togm} &{template:eg} [[ [[ [[@{dice_roll}]] + @{ability} + @{attkmod} + (@{diffmod}) + (@{attkdiff}) -4 ]] - @{target_num} ]] [[(@{attkdm}+@{attkdm2})@{attkd6}]] [[(@{attkdm}+@{attkdm2})@{attkd6}]] {{name=@{character_name} }} {{subtype=@{attkname} (3e att)}} {{ability=@{ability_name} : @{ability}}} {{combat=@{attkskill}}} {{skill=@{attkmod}}} {{difficulty=[[ [[@{diffmod}]][Difficulté] + [[@{attkdiff}]][MD attaque] -4[3eme attaque] ]] }} {{throw=$[[0]]}} {{check=$[[1]]}} {{effect=$[[2]]}} {{damage=$[[3]]}} {{major=$[[4]]}}"
+                >3e</button>
+                <input type="hidden" name="attr_attkskill" value="Contact" />
+                <input type="hidden" name="attr_attkmod" value="" />
+                <input type="hidden" name="attr_attkd6" value="d6" />
+                <input type="hidden" name="attr_attkdiff" value="0" />
+                <input type="hidden" name="attr_attkdm2" value="0" />
+              </td>
+            </tr>
+          </table>
         </fieldset>
       </div>
     </div>
@@ -750,17 +769,24 @@
                   value="9"
                 />
               </li>
+              <li>
+                <span class="sheet-w-33">Types de jet</span>:&nbsp;
+                <select class="sheet-w-auto" name="attr_togm">
+                  <option value="">Publics</option>
+                  <option value="/w gm">Murmurés au MJ</option>
+                </select>
+              </li>
             </ul>
           </li>
           <li>
             Bonus
             <ul>
               <li>
-                <span class="sheet-w-33">Endurance</span>:&nbsp;
+                <span class="sheet-w-33">Vigueur</span>:&nbsp;
                 <input
                   type="number"
                   class="sheet-small sheet-right"
-                  name="attr_end_mod"
+                  name="attr_vig_mod"
                   value="0"
                 />&nbsp;
               </li>
@@ -843,51 +869,112 @@
     </div>
     {{#subtype}}
     <h5 class="sheet-title">{{subtype}}</h5>
-    {{/subtype}} {{#throw}}
+    {{/subtype}} 
+    {{#throw}}
     <div class="sheet-mt-5">Jet <span class="sheet-prop">{{throw}}</span></div>
-    {{/throw}} {{#ability}}
+    {{/throw}} 
+    {{#ability}}
     <div>Attribut <span class="sheet-prop">{{ability}}</span></div>
-    {{/ability}} {{#skill}}
-    <div>Compétence <span class="sheet-prop">{{skill}}</span></div>
-    {{/skill}} {{#psi}}
+    {{/ability}} 
+    {{^combat}}
+      {{#skill}}
+      <div>Compétence <span class="sheet-prop">{{skill}}</span></div>
+      {{/skill}}
+    {{/combat}} 
+    {{#combat}}
+    <div>Combat {{combat}} <span class="sheet-prop">{{skill}}</span></div>
+    {{/combat}} 
+    {{#psi}}
     <div>Talent PSI <span class="sheet-prop">{{psi}}</span></div>
-    {{/psi}} {{#difficulty}}
+    {{/psi}} 
+    {{#difficulty}}
     <div>MOD <span class="sheet-prop">{{difficulty}}</span></div>
-    {{/difficulty}} {{#check}}
+    {{/difficulty}} 
+    {{#check}}
     <div class="sheet-mt-5">
       Test
       <span class="sheet-prop">{{check}}</span>
     </div>
-    {{/check}} {{#quality}}
+    {{/check}} 
+    {{#effect}}
     <div class="sheet-mt-5">
-      (Qualité)
-      <span class="sheet-prop">({{quality}})</span>
+      (Effet)
+      <span class="sheet-prop">({{effect}})</span>
     </div>
-    {{/quality}} {{#rollTotal() quality 0}}
-    <div class="sheet-mt-5 sheet-success">
-      <span class="sheet-margin">Succès Marginal...</span>
+    {{/effect}} 
+    {{#rollTotal() effect 0}}
+    <div class="sheet-mt-5 sheet-effect">
+      {{#rollTotal() throw 2}}
+      <span class="sheet-effect sheet-failure">Maladresse > Echec !</span>
+      {{/rollTotal() throw 2}}
+      {{#rollBetween() throw 3 11}}
+      <span class="sheet-effect sheet-success sheet-margin">Succès Marginal...</span>
+      {{/rollBetween() throw 3 11}}
+      {{#rollTotal() throw 12}}
+      <span class="sheet-effect sheet-success">Prouesse > Succès</span>
+      {{/rollTotal() throw 12}}
     </div>
-    {{/rollTotal() quality 0}} {{#rollBetween() quality 1 5}}
-    <div class="sheet-mt-5 sheet-success">
-      <span>Succès !</span>
+    {{/rollTotal() effect 0}} 
+    {{#rollBetween() effect 1 5}}
+    <div class="sheet-mt-5 sheet-effect">
+      {{#rollTotal() throw 2}}
+      <span class="sheet-effect sheet-success sheet-margin">Maladresse > Succès Marginal...</span>
+      {{/rollTotal() throw 2}}
+      {{#rollBetween() throw 3 11}}
+      <span class="sheet-effect sheet-success">Succès !</span>
+      {{/rollBetween() throw 3 11}}
+      {{#rollTotal() throw 12}}
+      <span class="sheet-effect sheet-success sheet-major">Prouesse > Succès Majeur !!</span>
+      {{/rollTotal() throw 12}}
     </div>
-    {{/rollBetween() quality 1 5}} {{#rollGreater() quality 5}}
-    <div class="sheet-mt-5 sheet-success">
-      <span class="sheet-major">Succès Majeur !!</span>
+    {{/rollBetween() effect 1 5}} 
+    {{#rollGreater() effect 5}}
+    <div class="sheet-mt-5 sheet-effect">
+      {{#rollTotal() throw 2}}
+      <span class="sheet-effect sheet-success">Maladresse > Succès !</span>
+      {{/rollTotal() throw 2}}
+      {{#rollBetween() throw 3 12}}
+      <span class="sheet-effect sheet-success sheet-major">Succès Majeur !!</span>
+      {{/rollBetween() throw 3 12}}
     </div>
-    {{/rollGreater() quality 5}} {{#rollTotal() quality -1}}
-    <div class="sheet-mt-5 sheet-failure">
-      <span class="sheet-margin">Echec Marginal...</span>
+    {{/rollGreater() effect 5}} 
+    {{#rollBetween() effect -5 -1}}
+    <div class="sheet-mt-5 sheet-effect">
+      {{#rollTotal() throw 2}}
+      <span class="sheet-effect sheet-failure sheet-major">Maladresse > Echec Majeur !!</span>
+      {{/rollTotal() throw 2}}
+      {{#rollBetween() throw 3 11}}
+      <span class="sheet-effect sheet-failure">Echec !</span>
+      {{/rollBetween() throw 3 11}}
+      {{#rollTotal() throw 12}}
+      <span class="sheet-effect sheet-success sheet-margin">Prouesse > Succès Marginal...</span>
+      {{/rollTotal() throw 12}}
     </div>
-    {{/rollTotal() quality -1}} {{#rollBetween() quality -5 -2}}
-    <div class="sheet-mt-5 sheet-failure">
-      <span>Echec !</span>
+    {{/rollBetween() effect -5 -1}} 
+    {{#rollLess() effect -5}}
+    <div class="sheet-mt-5 sheet-effect">
+      {{#rollBetween() throw 2 11}}
+      <span class="sheet-effect sheet-failure sheet-major">Echec Majeur !!</span>
+      {{/rollBetween() throw 2 11}}
+      {{#rollTotal() throw 12}}
+      <span class="sheet-effect sheet-failure">Prouesse > Echec !</span>
+      {{/rollTotal() throw 12}}
     </div>
-    {{/rollBetween() quality -5 -2}} {{#rollLess() quality -5}}
-    <div class="sheet-mt-5 sheet-failure">
-      <span class="sheet-major">Echec Majeur !!</span>
-    </div>
-    {{/rollLess() quality -5}} {{#description}}
+    {{/rollLess() effect -5}} 
+    {{#damage}}
+      <div class="sheet-my-5">Dommages <span class="sheet-prop"><span>{{damage}}</span>
+      {{#rollBetween() effect 0 5}}
+        {{#rollTotal() throw 12}}
+        <span title="Critique"> + {{major}}</span>
+        {{/rollTotal() throw 12}}
+      {{/rollBetween() effect 0 5}}
+      {{#rollGreater() effect 5}}
+        <span title="Critique"> + {{major}}</span>
+      {{/rollGreater() effect 5}}
+      <span title="Effet"> + {{effect}}</span>
+      </span></div>
+    {{/damage}}
+    {{#description}}
     <div class="sheet-txt-small">{{description}}</div>
     {{/description}}
   </div>
@@ -950,18 +1037,22 @@
   const physicalAbilities = [
     { attr: "@{for}", name: "Force" },
     { attr: "@{hab}", name: "Habileté" },
-    { attr: "@{viv}", name: "Vivacité" },
   ];
 
   const mentalAbilities = [
       { attr: "@{int}", name: "Intellect" },
       { attr: "@{vol}", name: "Volonté" },
-      { attr: "@{cha}", name: "Charme" },
     ];
+  
+    const socialAbilities = [
+      { attr: "@{sag}", name: "Sagacité" },
+      { attr: "@{cha}", name: "Charme" },
+    ]
 
   const abilities = [
     ...physicalAbilities,
-    ...mentalAbilities
+    ...mentalAbilities,
+    ...socialAbilities
   ];
 
   const conditions = [
@@ -982,37 +1073,39 @@
   const mobilityList = ["phy", "hab", "mob_mod"];
 
   const skillList = [
-    { name:"Administration", attr:"skill_admin" },
-    { name:"Armes lourdes", attr:"skill_hweapons" },
-    { name:"Athlétisme", attr:"skill_athlectics" },
-    { name:"Combat Contact", attr:"skill_melee" },
-    { name:"Combat Distance", attr:"skill_ranged" },
-    { name:"Combat Mains Nues", attr:"skill_hand" },
-    { name:"Commandement", attr:"skill_command" },
-    { name:"Commerce", attr:"skill_trading" },
-    { name:"Conduite", attr:"skill_driving" },
-    { name:"Coordination", attr:"skill_coordination" },
-    { name:"Culture Galactique", attr:"skill_culture" },
-    { name:"Discrétion", attr:"skill_stealth" },
-    { name:"Etiquette", attr:"skill_etiquette" },
-    { name:"Imposture", attr:"skill_deception" },
-    { name:"Infocom", attr:"skill_infocom" },
-    { name:"Intuition", attr:"skill_insight" },
-    { name:"Magouilles", attr:"skill_fiddling" },
-    { name:"Mecs", attr:"skill_mechs" },
-    { name:"Médecine", attr:"skill_medicine" },
-    { name:"Méditation", attr:"skill_meditation" },
-    { name:"Observation", attr:"skill_notice" },
-    { name:"Persuasion", attr:"skill_persuasion" },
-    { name:"Pilotage", attr:"skill_piloting" },
-    { name:"Pilote TL", attr:"skill_ftl_pilot" },
-    { name:"Sciences", attr:"skill_sciences" },
-    { name:"Séduction", attr:"skill_charm" },
-    { name:"Survie", attr:"skill_survival" },
-    { name:"Tactique", attr:"skill_tactics" },
-    { name:"Technologie", attr:"skill_technology" },
-    { name:"Varlet", attr:"skill_varlet" }
+    { name:"Administration [62]", attr:"skill_admin" },
+    { name:"Armes lourdes [53]", attr:"skill_heavywpns" },
+    { name:"Athlétisme [13]", attr:"skill_athletics" },
+    { name:"Baratin [14]", attr:"skill_charm" },
+    { name:"Combat Contact [34]", attr:"skill_melee" },
+    { name:"Combat Distance [35]", attr:"skill_ranged" },
+    { name:"Commerce [44]", attr:"skill_trading" },
+    { name:"Conduite [43]", attr:"skill_driving" },
+    { name:"Conversion [16]", attr:"skill_crafting" },
+    { name:"Coordination [25]", attr:"skill_coordination" },
+    { name:"Culture Galactique [42]", attr:"skill_culture" },
+    { name:"Discrétion [15]", attr:"skill_stealth" },
+    { name:"Endurance [32]", attr:"skill_endurance" },
+    { name:"Gravitique [66]", attr:"skill_gravitics" },
+    { name:"Illégalité [46]", attr:"skill_streetwise" },
+    { name:"Imposture [24]", attr:"skill_deception" },
+    { name:"Infocom [64]", attr:"skill_infocom" },
+    { name:"Investigation [36]", attr:"skill_investigation" },
+    { name:"Mécanique [63]", attr:"skill_mechanics" },
+    { name:"Mecs [65]", attr:"skill_mechs" },
+    { name:"Médecine [26]", attr:"skill_medicine" },
+    { name:"Méditation PSI [22]", attr:"skill_meditation" },
+    { name:"Observation [12]", attr:"skill_notice" },
+    { name:"Perspicacité [52]", attr:"skill_insight" },
+    { name:"Persuasion [54]", attr:"skill_persuasion" },
+    { name:"Pilotage [45]", attr:"skill_piloting" },
+    { name:"Pilotage TL [55]", attr:"skill_ftlpilot" },
+    { name:"Survie [23]", attr:"skill_survival" },
+    { name:"Tactique [33]", attr:"skill_tactics" },
+    { name:"Varlet [56]", attr:"skill_varlet" }
   ];
+
+  const PSI_BASE = 3;
 
   const psiList = [
     {
@@ -1492,19 +1585,7 @@
     },
   ];
 
-  const talentList = [
-    { name: "Adroit", desc: "", boon: 1, daily: 1 },
-    { name: "Agile", desc: "", boon: 1, daily: 1 },
-    { name: "Attentif", desc: "", boon: 1, daily: 1 },
-    { name: "Affable", desc: "", boon: 1, daily: 1 },
-    { name: "Attirant", desc: "", boon: 1, daily: 1 },
-    { name: "Calme", desc: "", boon: 1, daily: 1 },
-    { name: "Eloquent", desc: "", boon: 1, daily: 1 },
-    { name: "Imposant", desc: "", boon: 1, daily: 1 },
-    { name: "Intuitif", desc: "", boon: 1, daily: 1 },
-    { name: "Persévérant", desc: "", boon: 1, daily: 1 },
-    { name: "Puissant", desc: "", boon: 1, daily: 1 },
-    { name: "Résistant", desc: "", boon: 1, daily: 1 },
+  const traitList = [
     { name: "Acrobate", desc: "", required: "", boon: 0 },
     { name: "Artilleur", desc: "", required: "", boon: 0 },
     { name: "Astrogateur", desc: "", required: "", boon: 0 },
@@ -1515,6 +1596,7 @@
     { name: "Contrebandier", desc: "", required: "", boon: 0 },
     { name: "Craqueur", desc: "", required: "", boon: 0 },
     { name: "Ecuyer", desc: "", required: "", boon: 0 },
+    { name: "Enquêteur", desc: "", required: "", boon: 0 },
     { name: "Fleuriste", desc: "", required: "", boon: 0 },
     { name: "Grimpeur", desc: "", required: "", boon: 0 },
     { name: "Ingénieur Varlet", desc: "", required: "", boon: 0 },
@@ -1553,11 +1635,12 @@
     { name: "Expertise", desc: "", boon: 0 },
     { name: "Infatigable", desc: "", boon: 0 },
     { name: "Jugeote", desc: "", boon: 0 },
+    { name: "Mobile", desc: "", boon: 0 },
     { name: "PSI latent", desc: "", boon: 0 },
     { name: "Récupération  rapide", desc: "", boon: 0 },
     { name: "Robuste", desc: "", boon: 0 },
+    { name: "Santé de fer", desc: "", boon: 0 },
     { name: "Sens aiguisé", desc: "", boon: 0 },
-    { name: "Vitalité débordante", desc: "", boon: 0 },
     { name: "Xénophile", desc: "", boon: 0 },
   ];
 
@@ -1613,12 +1696,11 @@
     // console.log("Sheet-Worker >>>","Got event >>>",ei,next);
   }
 
-  function logAndSet(o, from) {
+  function logAndSet(attributes, from) {
     from = stringOrEmpty(from);
     if (from !== "") from = ` from ${from}`;
-    if (settings.debugMode) clog(o, `Set attributes${from}`, { text:"white", back:"green" });
-    // console.log("Sheet-Worker >>>",`Set attributes ${from}>>>`,o);
-    setAttrs(o);
+    if (settings.debugMode) clog(attributes, `Set attributes${from}`, { text:"white", back:"green" });
+    setAttrs(attributes);
   }
 
   buttonList.forEach(button => {
@@ -1629,71 +1711,31 @@
         });
     });
 
-  function setEndurance() {
-    getAttrs(["phy", "for", "vol", "end_mod"], function(v) {
-      const phy = int(v.phy);
-      const forv = int(v.for);
-      const vol = int(v.vol);
-      const end_mod = int(v.end_mod);
-      const end = phy*3 + forv + vol + end_mod;
-      const vitality = end*3;
-      logAndSet(
-        { end, vitality, vit_valid: end, vit_injured: end, cond_injured: 0, vit_critical: end, cond_critical: 0 },
-        "setEndurance"
-        );
-    });
-  }
-
-  function setHealthState(attr) {
-    const state = attr.split("_")[1];
-    attr = attr.split("_")[0];
-    getAttrs([`vit_${state}`,`cond_${state}`, "end"], function(v) {
-      const vit_state = int(v[`vit_${state}`]);
-      const cond_state = int(v[`cond_${state}`]);
-      const end = int(v.end);
-      let health = {};
-      if (attr === "vit") health[`cond_${state}`] = (vit_state < end) ? 1 : 0;
-      if (attr === "cond" && cond_state === 0) health[`vit_${state}`] = end;
-      logAndSet(health, "setHealthState");
-    });
-  }
-
-  function setWounds(attr) {
-    getAttrs([attr, "vit_valid", "vit_injured", "cond_injured", "vit_critical", "cond_critical"], function(v) {
-      const dmattr = Object.keys(v)[0];
-      let damage = int(v[dmattr]);
-      if (damage === 0) return;
-      let vitality = int(v.vitality);
-      let vit_valid = int(v.vit_valid);
-      let vit_injured = int(v.vit_injured);
-      let cond_injured = int(v.cond_injured);
-      let vit_critical = int(v.vit_critical);
-      let cond_critical = int(v.cond_critical);
-      while (damage > 0) {
-        if (vit_valid > 0) {
-          vit_valid--;
-        } else if (vit_injured > 0) {
-          cond_injured = 1
-          vit_injured--;
-        } else if (vit_critical > 0) {
-          cond_critical = 1
-          vit_critical--;
-        }
-        damage--
-      }
-      const attrs = { vit_valid, vit_injured, cond_injured, vit_critical, cond_critical };
-      attrs[dmattr] = damage;
-      logAndSet(attrs, "setWounds");
-    });
-  }
-
   function setVitality() {
-    getAttrs(["vit_valid", "vit_injured", "vit_critical"], function(v) {
-      let vitality = 0;
-      vitality += int(v.vit_valid);
-      vitality += int(v.vit_injured);
-      vitality += int(v.vit_critical);
-      logAndSet({ vitality }, "setVitality");
+    getAttrs(["phy", "vol", "skill_endurance", "vig_mod"], function(v) {
+      const phy = int(v.phy);
+      const vol = int(v.vol);
+      const endurance = int(v.skill_endurance);
+      const vig_mod = int(v.vig_mod);
+      const vig_max = phy*3 + vol + endurance + vig_mod;
+      const vit_max = vig_max*2;
+      logAndSet({ vig_max, vit_max }, "setVitality");
+    });
+  }
+
+  function setHealthState() {
+    getAttrs(["vit", "vit_max"], function(v) {
+      const vitality = int(v.vit);
+      const vitality_max = int(v.vit_max);
+      let health = { 
+        cond_injured: 0,
+        cond_critical: 0,
+        cond_dying: "",
+      };
+      if (vitality < vitality_max ) health.cond_injured = 1;
+      if (vitality < vitality_max / 2) health.cond_critical = 1;
+      if (vitality === 0) health.cond_dying = 1;
+      logAndSet(health, "setHealthState");
     });
   }
 
@@ -1729,13 +1771,18 @@
       rowIds.forEach((rowId) => {
         removeRepeatingRow(`repeating_skills_${rowId}`);
       });
-      let attrs = {};
       skillList.forEach((skill) => {
-        const rowId = generateRowID();
-        attrs[`repeating_skills_${rowId}_skillname`] = skill.name;
-        attrs[`repeating_skills_${rowId}_skillattr`] = stringOrEmpty(skill.attr);
+        getAttrs([ skill.attr ], function (v) {
+          const rowId = "repeating_skills_" + generateRowID();
+          const attrs = {};
+          const skillMod = stringOrEmpty(v[skill.attr]);
+          attrs[`${rowId}_skillname`] = skill.name;
+          attrs[`${rowId}_skillattr`] = stringOrEmpty(skill.attr);
+          if (skillMod !== "") attrs[`${rowId}_skillmod`] = int(v[skill.attr]);
+          else attrs[`${rowId}_unskilled`] = 1;
+          logAndSet(attrs, "createSkillList");
+        });
       });
-      logAndSet(attrs, "createSkillList");
     });
   }
 
@@ -1823,6 +1870,10 @@
     return (mentalAbilities.findIndex(ma => ma.attr === abilityId) !== -1);
   }
 
+  function isSocial(abilityId) {
+    return (socialAbilities.findIndex(ma => ma.attr === abilityId) !== -1);
+  }
+
   function changeDiceRoll(params) {
     let roll_conditions = "";
     let roll = params.rollType;
@@ -1845,8 +1896,8 @@
       }
     }
     if (params.injured === 1 || params.wornout === 1) {
-      if (parmas.injured === 1) roll_conditions += " + Blessé (C)";
-      if (parmas.wornout === 1) roll_conditions += " + Abattu (C)";
+      if (params.injured === 1) roll_conditions += " + Blessé (C)";
+      if (params.wornout === 1) roll_conditions += " + Abattu (C)";
       if (roll === DICE_ROLL) {
         roll = BANE_ROLL;
       } else if (roll === BOON_ROLL) {
@@ -1862,17 +1913,17 @@
       }
     }
     if (params.exhausted === 1) {
-      if (isMental(params.ability)) {
-        roll_conditions += " + Epuisé (C:mental)";
+      if (isPhysical(params.ability)) {
+        roll_conditions += " + Epuisé (physique)";
+        roll = CANT_ROLL;
+      } else {
+        if (isMental(params.ability)) roll_conditions += " + Epuisé (C:mental)";
+        else roll_conditions += " + Epuisé (C:social)";
         if (roll === DICE_ROLL) {
           roll = BANE_ROLL;
         } else if (roll === BOON_ROLL) {
           roll = DICE_ROLL;
         }
-      }
-      if (isPhysical(params.ability)) {
-        roll_conditions += " + Epuisé (physique)";
-        roll = CANT_ROLL;
       }
     }
 
@@ -2012,33 +2063,35 @@
   };
 
   function skillModUpdated(eventInfo) {
-    const rowId = eventInfo.sourceAttribute.split("_")[2];
-    getAttrs([`repeating_skills_${rowId}_skillattr`], function(v) {
+    const rowId = 'repeating_skills_' + eventInfo.sourceAttribute.split("_")[2];
+    getAttrs([`${rowId}_skillattr`], function(v) {
       const skillAttr = stringOrEmpty(v[Object.keys(v)[0]]);
       if (skillAttr === "") return;
-      const attr = {};
-      attr[skillAttr] = int(eventInfo.newValue);
-      logAndSet(attr, "skillModUpdated");
+      const attrs = {};
+      const skillMod = stringOrEmpty(eventInfo.newValue);
+      if (skillMod !== "") attrs[skillAttr] = int(skillMod);
+      else attrs[`${rowId}_unskilled`] = 1
+      logAndSet(attrs, "skillModUpdated");
     });
   };
 
-  function addTalent() {
-    getAttrs(['talent_choice'], function(v) {
-      let talentName = stringOrEmpty(v.talent_choice);
-      if (talentName === "") return;
-      if (talentName.startsWith("[") && talentName.endsWith("]")) return;
-      const talent = talentList.filter((item) => {
-        return (item.name.toLowerCase() === talentName.toLowerCase())
+  function addTrait() {
+    getAttrs(['trait_choice'], function(v) {
+      let traitName = stringOrEmpty(v.trait_choice);
+      if (traitName === "") return;
+      if (traitName.startsWith("[") && traitName.endsWith("]")) return;
+      const trait = traitList.filter((item) => {
+        return (item.name.toLowerCase() === traitName.toLowerCase())
       });
-      if (talent.length === 0) return;
-      let attrs = { talent_choice: "" };
+      if (trait.length === 0) return;
+      let attrs = { trait_choice: "" };
       const rowId = generateRowID();
-      attrs[`repeating_talents_${rowId}_talentname`] = talent[0].name;
-      attrs[`repeating_talents_${rowId}_talentdesc`] = talent[0].name; // talent[0].desc
-      attrs[`repeating_talents_${rowId}_asset`] = talent[0].boon;
-      const daily = (talent[0].daily == 1) || false;
-      if (daily) attrs[`repeating_talents_${rowId}_assetdaily`] = 1;
-      logAndSet(attrs, "addTalent");
+      attrs[`repeating_traits_${rowId}_traitname`] = trait[0].name;
+      attrs[`repeating_traits_${rowId}_traitdesc`] = trait[0].name; // trait[0].desc
+      attrs[`repeating_traits_${rowId}_asset`] = trait[0].boon;
+      const daily = (trait[0].daily == 1) || false;
+      if (daily) attrs[`repeating_traits_${rowId}_assetdaily`] = 1;
+      logAndSet(attrs, "addTrait");
     });
   };
 
@@ -2057,7 +2110,7 @@
     return attrs;
   };
 
-  function parseTalent(eventInfo) {
+  function parseTrait(eventInfo) {
     const attrs = {};
     let result;
     result = parseText(eventInfo.previousValue, 0);
@@ -2068,7 +2121,7 @@
     Object.keys(result).forEach(attr => {
       attrs[attr] = result[attr];
     });
-    logAndSet(attrs, "parseTalent");
+    logAndSet(attrs, "parseTrait");
   };
 
   function psiRankDesc(psi, r) {
@@ -2114,31 +2167,88 @@
   }
 
   function changePSIDesc(eventInfo) {
-    const rowId = eventInfo.sourceAttribute.split("_")[2];
-    getAttrs([`repeating_psis_${rowId}_psiname`, eventInfo.sourceAttribute], function(v) {
+    const rowId = "repeating_psis_" + eventInfo.sourceAttribute.split("_")[2];
+    getAttrs([`${rowId}_psiname`, eventInfo.sourceAttribute], function(v) {
       const psiName = stringOrEmpty(v[Object.keys(v)[0]]);
       const psiMod = int(v[Object.keys(v)[1]]);
       let attr = {};
       const descs = setPSIDesc(psiName, psiMod);
       descs.forEach((d,r) => {
-        attr[`repeating_psis_${rowId}_psidesc${r+1}`] = descs[r];
+        attr[`${rowId}_psidesc${r+1}`] = descs[r];
       });
-      attr[`repeating_psis_${rowId}_psidesc`] = descs.join('\n').replaceAll("&#44;",",");
+      attr[`${rowId}_psidesc`] = descs.join('\n').replaceAll("&#44;",",");
       logAndSet(attr, "changePSIDesc");
+    });
+  }
+
+  function updateAttackDM(eventInfo) {
+    const rowId = "repeating_combat_" + eventInfo.sourceAttribute.split("_")[2];
+    getAttrs([`${rowId}_attkua`, 'for'], function(v) {
+      const unArmed = int(v[Object.keys(v)[0]]) === 1;
+      const attrs = {};
+      if (unArmed) {
+        attrs[`${rowId}_attkdm`] = Math.max(1, int(v.for));
+        attrs[`${rowId}_attkd6`] = "";
+      } else {
+        attrs[`${rowId}_attkd6`] = "d6";
+      }
+      logAndSet(attrs, "updateAttackDM");
+    });
+  }
+
+  function updateAttackExtra(eventInfo) {
+    const rowId = "repeating_combat_" + eventInfo.sourceAttribute.split("_")[2];
+    getAttrs([`${rowId}_attkprc` ], function(v) {
+      const attkPrecise = int(v[Object.keys(v)[0]]);
+      let attkDmg2 = attkPrecise;
+      const attrs = {};
+      attrs[`${rowId}_attkdiff`] = attkPrecise * -2;
+      attrs[`${rowId}_attkdm2`] = attkDmg2;
+      logAndSet(attrs, "updateAttackExtra");
+    });
+  }
+
+  function updateAttackMod(eventInfo) {
+    const rowId = "repeating_combat_" + eventInfo.sourceAttribute.split("_")[2];
+    getAttrs([`${rowId}_attkranged`, 'skill_melee', 'skill_ranged'], function(v) {
+      const ranged = int(v[Object.keys(v)[0]]) === 1;
+      const attrs = {};
+      if (ranged) {
+        attrs[`${rowId}_attkskill`] = "Distance";
+        attrs[`${rowId}_attkmod`] = int(v.skill_ranged);
+      } else {
+        attrs[`${rowId}_attkskill`] = "Contact";
+        attrs[`${rowId}_attkmod`] = int(v.skill_melee);
+      }
+      logAndSet(attrs, "updateAttackMod");
+    });
+  }
+
+  function updateAllAttackMods(eventInfo) {
+    getSectionIDs("repeating_combat", function (rowIds) {
+      rowIds.forEach(rowId => {
+        const repeatId = `repeating_combat_${rowId}`;
+        getAttrs([ `${repeatId}_attkranged`, 'skill_melee', 'skill_ranged' ], function (v) {
+          const ranged = int(v[Object.keys(v)[0]]) === 1;
+          const attrs = {};
+          if (ranged) attrs[`${repeatId}_attkmod`] = int(v.skill_ranged);
+          else attrs[`${repeatId}_attkmod`] = int(v.skill_melee);
+          logAndSet(attrs, "updateAllAttackMods");
+        });
+      });
     });
   }
 
   function changePSIMax(eventInfo) {
     getAttrs(['skill_meditation', 'psi_mod'], function (v) {
-      const psi_base = int(v.skill_meditation);
+      const psi_meditation = int(v.skill_meditation);
       const psi_mod = int(v.psi_mod);
-      let psi_max = psi_base + psi_mod;
+      let psi_max = PSI_BASE + psi_meditation + psi_mod;
       getSectionIDs("repeating_psis", function(rowIds) {
         rowIds.forEach(rowId => {
           getAttrs([`repeating_psis_${rowId}_psimod`], function(v) {
             const psimod = int(v[Object.keys(v)[0]]);
             psi_max += psimod;
-            console.log(psimod, psi_max);
             logAndSet({ psi_max }, "changePSIMax");
           });
         });
@@ -2180,29 +2290,19 @@
     setAbilityName();
   });
 
-  on(["change:phy", "change:for", "change:vol", "change:end_mod"].join(" "), function(eventInfo) {
-    logEvent(eventInfo);
-    setEndurance();
-  });
-
-  on(["change:vit_injured", "change:cond_injured", "change:vit_critical", "change:cond_critical"].join(" "), function(eventInfo) {
-    logEvent(eventInfo);
-    setHealthState(eventInfo.sourceAttribute);
-  });
-
-  on("clicked:damage", function(eventInfo) {
-    logEvent(eventInfo);
-    setWounds("damage");
-  });
-
-  on("change:got_dmg", function(eventInfo) {
-    logEvent(eventInfo);
-    setWounds("got_dmg");
-  });
-
-  on(["change:vit_valid", "change:vit_injured", "change:vit_critical"].join(" "), function(eventInfo) {
+  on([
+    "change:phy", 
+    "change:vol", 
+    "change:skill_endurance", 
+    "change:vig_mod"
+  ].join(" "), function(eventInfo) {
     logEvent(eventInfo);
     setVitality();
+  });
+
+  on("change:vit", function(eventInfo) {
+    logEvent(eventInfo);
+    setHealthState();
   });
 
   on(["change:phy", "change:hab", "change:mob_mod"].join(" "), function(eventInfo) {
@@ -2237,14 +2337,14 @@
     setDiceRoll(eventInfo);
   });
 
-  on("clicked:addtalent", function(eventInfo) {
+  on("clicked:addtrait", function(eventInfo) {
     logEvent(eventInfo);
-    addTalent();
+    addTrait();
   });
 
-  on("change:repeating_talents:talentdesc", function(eventInfo) {
+  on("change:repeating_traits:traitdesc", function(eventInfo) {
     logEvent(eventInfo);
-    parseTalent(eventInfo);
+    parseTrait(eventInfo);
   });
 
   on("clicked:addpsi", function(eventInfo) {
@@ -2257,6 +2357,26 @@
     changePSIDesc(eventInfo);
   });
 
+  on("change:repeating_combat:attkranged", function(eventInfo) {
+    logEvent(eventInfo);
+    updateAttackMod(eventInfo);
+  });
+
+  on("change:skill_melee change:skill_ranged", function(eventInfo) {
+    logEvent(eventInfo);
+    updateAllAttackMods(eventInfo);
+  });
+
+  on("change:repeating_combat:attkua", function(eventInfo) {
+    logEvent(eventInfo);
+    updateAttackDM(eventInfo);
+  });
+
+  on("change:repeating_combat:attkprc", function(eventInfo) {
+    logEvent(eventInfo);
+    updateAttackExtra(eventInfo);
+  });
+
   on("change:skill_meditation change:repeating_psis:psimod change:psi_mod", function (eventInfo) {
     logEvent(eventInfo);
     changePSIMax(eventInfo);
@@ -2266,4 +2386,5 @@
     logEvent(eventInfo);
     showConditions();
   });
+
 </script>
